@@ -51,7 +51,6 @@ define.lint([
       "**/public/rstack/**",
       "**/public/rstack-console/**",
       "**/.output/**",
-      "**/docs/.rspress/**",
     ],
   },
 ]);
@@ -67,20 +66,4 @@ define.fmt({
     "dist/**",
     ".output/**",
   ],
-});
-
-define.doc({
-  root: "docs",
-  title: "SuperNuxt",
-  description: "Nuxt 4 with TanStack and the Rstack toolchain.",
-  themeConfig: {
-    nav: [{ text: "Guide", link: "/guide/install" }],
-    sidebar: {
-      "/guide/": [
-        { text: "Install", link: "/guide/install" },
-        { text: "TanStack", link: "/guide/tanstack" },
-        { text: "Rstack", link: "/guide/rstack" },
-      ],
-    },
-  },
 });

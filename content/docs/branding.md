@@ -2,7 +2,7 @@
 title: "Branding"
 description: "The single emerald mark, the wordmark, and the color tokens."
 section: Framework
-order: 4
+order: 5
 ---
 
 SuperNuxt has one logo. The favicon, the header, the docs, the landing page, and the files written by the scaffolder all use the same emerald mark.

@@ -50,8 +50,6 @@
     "lint": "rs lint",
     "format": "rs fmt",
     "check": "rs check",
-    "docs:dev": "rs doc --port 47823",
-    "docs:build": "rs doc build",
     "lib": "rs lib",
     "rstack:dev": "rs dev --port 47831",
     "rstack:build": "rs build",
@@ -88,7 +86,6 @@
   },
   "devDependencies": {
     "@rsdoctor/core": "^1.6.5",
-    "@rspress/core": "^2.0.23",
     "@tanstack/cli": "^0.71.1",
     "@tanstack/config": "^0.22.2",
     "@tanstack/intent": "^0.5.5",

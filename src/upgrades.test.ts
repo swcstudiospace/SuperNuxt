@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "@rstest/core";
 import { dispatchServerFn } from "./domain/contracts";
-import { orderDocs, parseDocSource, rspressSidebar } from "./domain/docs";
+import { orderDocs, parseDocSource } from "./domain/docs";
 import { applyStatus, createLedger } from "./domain/ledger";
 import { defineLayerConfig } from "./domain/layer";
 import {
@@ -118,9 +118,17 @@ describe("doc corpus", () => {
         ),
     );
     expect(pages[0]?.href).toBe("/docs");
-    expect(pages.map((page) => page.slug)).toContain("installation");
-    expect(
-      rspressSidebar(pages).some((item) => item.link === "/guide/branding"),
-    ).toBe(true);
+    expect(pages.map((page) => page.slug)).toEqual([
+      "introduction",
+      "installation",
+      "usage",
+      "module",
+      "branding",
+      "tanstack",
+      "server-functions",
+      "rstack",
+      "deno",
+      "publish",
+    ]);
   });
 });

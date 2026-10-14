@@ -1,76 +1,54 @@
 # SuperNuxt
 
-SuperNuxt is a Nuxt 4 framework. A new app extends the layer and opens on a white and emerald landing page. The documentation site is part of the framework, at `/docs`. The TanStack studio is at `/studio`.
-
-The logo is one file. `public/favicon.svg`, `public/brand/mark.svg`, and the favicon written by the scaffolder are the same emerald mark.
+SuperNuxt is a Nuxt 4 framework. A new app extends the layer and opens on a white and emerald landing page. The documentation site ships with the framework at `/docs`. The TanStack studio is at `/studio`.
 
 ## Create an app
 
-```bash
-npm create supernuxt@latest
-pnpm create supernuxt
-bunx create-supernuxt
-npx create-supernuxt@latest
-npx supernuxt my-app
-deno run -A jsr:@supernuxt/create my-app
-```
-
-`npm create` and `pnpm create` download `create-supernuxt`. `npx supernuxt` uses the binary on the `supernuxt` package. Deno can run the npm package before JSR is published:
+These commands work after the packages are published. [Publish](content/docs/publish.md) is how to put them on npm and JSR. From this checkout, before that:
 
 ```bash
-deno run -A npm:create-supernuxt my-app
-```
-
-Then install and start. The landing page is already there, because the app extends the layer and does not ship its own `app/pages`.
-
-```bash
+npm install
+npm run create -- my-app --framework file:.
 cd my-app
 npm install
 npm run dev
 ```
 
+After publish:
+
 ```bash
-pnpm install && pnpm dev
-bun install && bun run dev
-deno install && deno task dev
+npm create supernuxt@latest my-app
+pnpm create supernuxt my-app
+bunx create-supernuxt my-app
+npx create-supernuxt@latest my-app
+npx supernuxt my-app
+deno run -A jsr:@supernuxt/create my-app
 ```
+
+`npm create supernuxt` downloads the npm package `create-supernuxt`. `npx supernuxt` runs the binary on the `supernuxt` package. Use `bunx`, not `bun create`.
 
 ## Run this repository
 
-Node.js 22.21 or newer. Deno 2 is optional and uses the tasks in `deno.json`.
+Node.js 22.21 or newer.
 
 ```bash
 npm install
 npm run dev
 ```
 
-```bash
-deno task dev
-```
-
 Open [http://127.0.0.1:47821](http://127.0.0.1:47821).
-
-## Packages
-
-| Registry | Name                | Role                                         |
-| -------- | ------------------- | -------------------------------------------- |
-| npm      | `supernuxt`         | The Nuxt layer and module                    |
-| npm      | `create-supernuxt`  | The scaffolder behind `npm create supernuxt` |
-| JSR      | `@supernuxt/core`   | The framework module entry                   |
-| JSR      | `@supernuxt/create` | The Deno scaffolder                          |
 
 ## Scripts
 
-| Script                     | What it does                    |
-| -------------------------- | ------------------------------- |
-| `npm run dev`              | Nuxt on port 47821              |
-| `npm run build`            | Production build                |
-| `npm test`                 | Rstest                          |
-| `npm run lint`             | Rslint                          |
-| `npm run create -- my-app` | Scaffold next to this repo      |
-| `npm run docs:dev`         | Rspress reference on port 47823 |
-| `npm run rstack:build`     | Rsbuild console                 |
+| Script                     | What it does                      |
+| -------------------------- | --------------------------------- |
+| `npm run dev`              | Nuxt on port 47821                |
+| `npm run build`            | Production build                  |
+| `npm test`                 | Rstest                            |
+| `npm run lint`             | Rslint                            |
+| `npm run create -- my-app` | Scaffold an app next to this repo |
+| `npm run rstack:build`     | Rsbuild console                   |
 
-The in-app documentation at `/docs` is the site that ships with an install. Rspress stays as the toolchain mirror.
+User documentation lives in `content/docs` and is served at `/docs`. There is no separate docs site.
 
 The AI bench uses a local TanStack AI adapter and does not need a key.

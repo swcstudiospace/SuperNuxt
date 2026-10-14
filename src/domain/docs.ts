@@ -17,11 +17,6 @@ export interface DocPage {
   readonly body: string;
 }
 
-export interface RspressSidebarItem {
-  readonly text: string;
-  readonly link: string;
-}
-
 function unquote(value: string): string {
   const trimmed = value.trim();
   if (
@@ -72,22 +67,4 @@ export function orderDocs(pages: readonly DocPage[]): DocPage[] {
   return [...pages].sort(
     (a, b) => a.order - b.order || a.slug.localeCompare(b.slug),
   );
-}
-
-export function rspressSidebar(
-  pages: readonly DocPage[],
-): RspressSidebarItem[] {
-  return orderDocs(pages).map((page) => ({
-    text: page.title,
-    link:
-      page.slug === "introduction"
-        ? "/guide/introduction"
-        : `/guide/${page.slug}`,
-  }));
-}
-
-export function rewriteDocLinks(markdown: string): string {
-  return markdown
-    .replaceAll("](/docs/", "](/guide/")
-    .replaceAll("](/docs)", "](/guide/introduction)");
 }

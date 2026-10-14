@@ -2,7 +2,7 @@
 title: "Deno"
 description: "Deno tasks, JSR package names, and how the scaffolder runs."
 section: Ship
-order: 8
+order: 9
 ---
 
 Deno runs the scaffolder and the framework tasks. The Nuxt app itself is the same package Node, Bun, and Deno install from npm.
@@ -21,7 +21,7 @@ deno task test
 
 ## JSR
 
-Publish the framework as `@supernuxt/core` from the repository root. Publish the scaffolder as `@supernuxt/create` from `packages/create-supernuxt`. The create package is also the npm package `create-supernuxt`, which is what `npm create supernuxt` and `pnpm create supernuxt` download.
+Publish the framework as `@supernuxt/core` from the repository root. Publish the scaffolder as `@supernuxt/create` from `packages/create-supernuxt`. The create package is also the npm package `create-supernuxt`. [Publish](/docs/publish) is the full sequence, including the local trial before either registry.
 
 ```bash
 deno publish

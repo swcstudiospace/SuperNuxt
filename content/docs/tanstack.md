@@ -2,7 +2,7 @@
 title: "TanStack"
 description: "Every TanStack bench in the studio and the packages that stay on the toolchain."
 section: Integrations
-order: 5
+order: 6
 ---
 
 SuperNuxt integrates the TanStack libraries that ship a Vue adapter, and it documents the ones that stay on the tooling side.

@@ -2,7 +2,7 @@
 title: "Module"
 description: "Extend the layer or register the module, and the options it accepts."
 section: Framework
-order: 3
+order: 4
 ---
 
 Add the module to a Nuxt 4 app you already have, or extend the layer and take the landing page with it.

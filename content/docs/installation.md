@@ -5,27 +5,39 @@ section: Start
 order: 2
 ---
 
-SuperNuxt installs from npm and from JSR. The scaffolder writes only the files an app needs. The framework layer supplies the landing page and this documentation site.
+These commands download the scaffolder and write a new app. They work after `supernuxt` and `create-supernuxt` are on npm, and after `@supernuxt/create` is on JSR. Publishing those packages is [Publish](/docs/publish). Until then, run the scaffolder from this repository with `npm run create`.
 
 ## Create an app
 
 ```bash
-npm create supernuxt@latest
-pnpm create supernuxt
-bunx create-supernuxt
-npx create-supernuxt@latest
-deno run -A jsr:@supernuxt/create
+npm create supernuxt@latest my-app
+pnpm create supernuxt my-app
+bunx create-supernuxt my-app
+npx create-supernuxt@latest my-app
+npx supernuxt my-app
+deno run -A jsr:@supernuxt/create my-app
 ```
 
-`npm create supernuxt` resolves the `create-supernuxt` package. `npx supernuxt` runs the same scaffolder from the `supernuxt` package. Deno can also run the npm package before the JSR publish:
+`npm create supernuxt` and `pnpm create supernuxt` both install the npm package named `create-supernuxt`. `npx create-supernuxt` is that same package. `npx supernuxt` runs the `supernuxt` binary, which is the same script shipped inside the framework package. `bun create` is a different Bun feature and does not run this scaffolder. Use `bunx`.
+
+Deno can run the npm package before the JSR publish:
 
 ```bash
 deno run -A npm:create-supernuxt my-app
 ```
 
-Pass a directory name, or `--dir`. Add `--pm npm`, `--pm pnpm`, `--pm bun`, or `--pm deno` to print the matching install and dev commands. The scaffolder does not prompt when the terminal is not interactive.
+From a clone of this repository, before either registry has the package:
 
-## Files the scaffolder writes
+```bash
+npm run create -- my-app --framework file:.
+cd my-app
+npm install
+npm run dev
+```
+
+`--framework file:.` points the new app at this checkout instead of the npm release. Pass `--force` if `my-app` already exists and is not empty. `--pm pnpm`, `--pm bun`, or `--pm deno` only changes the install and dev lines the command prints.
+
+## Files it writes
 
 ```txt
 my-app/
@@ -36,9 +48,11 @@ my-app/
   deno.json
   README.md
   public/favicon.svg
+  .gitignore
+  .nuxtrc
 ```
 
-`nuxt.config.ts` extends the `supernuxt` layer. `app/app.vue` renders `NuxtLayout` and `NuxtPage`. There is no `app/pages` directory, so the layer's landing page stays in place until you add one.
+`nuxt.config.ts` extends `supernuxt`. `app/app.vue` renders the layout and the page. There is no `app/pages` directory, so `/`, `/docs`, and `/studio` come from the layer. The favicon is the same mark as `public/brand/mark.svg` in the framework.
 
 ## Run it
 
@@ -48,11 +62,10 @@ npm install
 npm run dev
 ```
 
-With Deno, from the same directory:
-
 ```bash
-deno install
-deno task dev
+pnpm install && pnpm dev
+bun install && bun run dev
+deno install && deno task dev
 ```
 
-The first screen is the SuperNuxt landing page. Documentation is at `/docs`. The TanStack studio is at `/studio`.
+The first screen is the SuperNuxt landing page. Continue with [Usage](/docs/usage).

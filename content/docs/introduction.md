@@ -19,4 +19,4 @@ The package is a Nuxt layer. A new app extends that layer, so the landing page, 
 
 ## Where to go next
 
-Start with [installation](/docs/installation) if you are creating an app. Read [the module](/docs/module) if you are adding SuperNuxt to a Nuxt app you already have. The [studio](/studio) is the live reference for Query, DB, AI, Table, and the rest.
+Start with [installation](/docs/installation) if you are creating an app, then [usage](/docs/usage). Read [the module](/docs/module) if you are adding SuperNuxt to a Nuxt app you already have. [Publish](/docs/publish) is how the install commands get onto npm and JSR. The [studio](/studio) is the live reference for Query, DB, AI, Table, and the rest.

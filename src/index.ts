@@ -197,7 +197,8 @@ export const rstackTools = [
     kind: "tooling",
     group: "Rstack",
     packageName: "@rspress/core",
-    summary: "Docs site for the framework.",
+    summary:
+      "Docs engine that ships inside Rstack. SuperNuxt docs are the Nuxt site at /docs.",
   },
   {
     id: "rsdoctor",
