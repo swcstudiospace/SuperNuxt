@@ -1,6 +1,9 @@
-import { missions } from "../shared/missions";
+import type { Mission } from "../shared/missions";
 
-export function composeDeskReply(prompt: string): string {
+export function composeDeskReply(
+  prompt: string,
+  missions: readonly Mission[],
+): string {
   const asked = prompt.toLowerCase();
   const hits = missions.filter((mission) => {
     const haystack =

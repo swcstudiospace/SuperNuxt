@@ -52,8 +52,9 @@ describe("supernuxt catalog", () => {
 
   it("briefs a known mission without calling a provider", async () => {
     const { composeDeskReply } = await import("./desk-reply");
-    expect(composeDeskReply("status of kite-4")).toContain("KITE-4");
-    expect(composeDeskReply("")).toContain("Desk is listening");
+    const { missions } = await import("../shared/missions");
+    expect(composeDeskReply("status of kite-4", missions)).toContain("KITE-4");
+    expect(composeDeskReply("", missions)).toContain("Desk is listening");
   });
 
   it("accepts server function names and rejects empty labels", () => {

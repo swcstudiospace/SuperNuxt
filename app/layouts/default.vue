@@ -5,6 +5,7 @@ import { docPages, docSections } from "../../shared/docs";
 const route = useRoute();
 const helpOpen = ref(false);
 const query = ref("");
+const policy = useSuperNuxt();
 
 const section = computed(() => {
   if (route.path.startsWith("/docs")) return "docs";
@@ -117,7 +118,7 @@ const filteredDocs = computed(() => {
       </main>
     </div>
 
-    <DevtoolsDock v-if="section === 'studio'" />
+    <DevtoolsDock v-if="section === 'studio' && policy.queryDevtools" />
 
     <div v-if="helpOpen" class="help-layer" @click.self="helpOpen = false">
       <div class="paper help-card" role="dialog" aria-labelledby="help-title">

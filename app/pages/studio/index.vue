@@ -1,38 +1,15 @@
 <script setup lang="ts">
 import { rstackTools, tanstackLibraries } from "../../../src/index";
-import { studioNav } from "../../../shared/nav";
+import { hrefFor } from "../../../shared/nav";
 
-const routeFor: Record<string, string> = {
-  query: "/studio/query",
-  db: "/studio/db",
-  store: "/studio/store",
-  ai: "/studio/ai",
-  table: "/studio/table",
-  charts: "/studio/charts",
-  form: "/studio/form",
-  hotkeys: "/studio/hotkeys",
-  virtual: "/studio/virtual",
-  pacer: "/studio/pacer",
-  ranger: "/studio/ranger",
-  router: "/studio/router",
-  markdown: "/studio/prose",
-  highlight: "/studio/prose",
-  start: "/studio/start",
-  devtools: "/studio/devtools",
-  config: "/studio/rstack#tanstack-tools",
-  cli: "/studio/rstack#tanstack-tools",
-  intent: "/studio/rstack#tanstack-tools",
-};
-
-function hrefFor(id: string) {
-  return routeFor[id] ?? "/studio/rstack";
+function cardHref(id: string) {
+  const href = hrefFor(id);
+  if (id === "config" || id === "cli" || id === "intent")
+    return `${href}#tanstack-tools`;
+  return href;
 }
 
-const linked = tanstackLibraries.filter(
-  (entry) =>
-    studioNav.some((item) => item.href === hrefFor(entry.id)) ||
-    hrefFor(entry.id).startsWith("/"),
-);
+const linked = tanstackLibraries;
 </script>
 
 <template>
@@ -72,7 +49,7 @@ const linked = tanstackLibraries.filter(
       v-for="entry in linked"
       :key="entry.id"
       class="card"
-      :to="hrefFor(entry.id)"
+      :to="cardHref(entry.id)"
     >
       <p class="kicker">{{ entry.group }}</p>
       <h3>{{ entry.name }}</h3>

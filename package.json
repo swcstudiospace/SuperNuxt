@@ -33,7 +33,8 @@
     "README.md"
   ],
   "exports": {
-    ".": "./modules/supernuxt/index.ts",
+    ".": "./nuxt.config.ts",
+    "./nuxt": "./modules/supernuxt/index.ts",
     "./core": "./src/index.ts",
     "./cli": "./packages/create-supernuxt/index.mjs"
   },

@@ -8,7 +8,7 @@ metadata:
   type: framework
   framework: nuxt
   library: supernuxt
-  library_version: 0.1.0
+  library_version: 0.2.0
 sources:
   - supernuxt:modules/supernuxt/index.ts
   - supernuxt:modules/supernuxt/runtime/query.ts

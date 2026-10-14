@@ -1,3 +1,10 @@
+---
+title: "Installation"
+description: "Create an app with npm, pnpm, Bun, npx, or Deno."
+section: Start
+order: 2
+---
+
 SuperNuxt installs from npm and from JSR. The scaffolder writes only the files an app needs. The framework layer supplies the landing page and this documentation site.
 
 ## Create an app

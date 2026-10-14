@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "exports": {
     ".": "./src/index.ts",
-    "./module": "./modules/supernuxt/index.ts",
+    "./nuxt": "./modules/supernuxt/index.ts",
     "./cli": "./packages/create-supernuxt/index.mjs"
   },
   "tasks": {

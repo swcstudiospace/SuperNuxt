@@ -2,19 +2,20 @@
 import { createCollection, eq, localOnlyCollectionOptions } from "@tanstack/db";
 import { useLiveQuery } from "@tanstack/vue-db";
 import {
-  missions,
   missionStatuses,
   type Mission,
   type MissionStatus,
 } from "../../../shared/missions";
+import { isDraftId } from "../../../src/domain/ledger";
 
 const status = ref<"all" | MissionStatus>("all");
+const { data: remote } = await useFetch<Mission[]>("/api/missions");
 
 const board = createCollection(
   localOnlyCollectionOptions({
     id: "mission-board",
     getKey: (item: Mission) => item.id,
-    initialData: missions.map((mission) => ({ ...mission })),
+    initialData: (remote.value ?? []).map((mission) => ({ ...mission })),
   }),
 );
 
@@ -33,6 +34,7 @@ function addRow() {
   const name = draft.value.trim();
   if (!name) return;
   const id = `local-${Date.now()}`;
+  if (!isDraftId(id)) return;
   board.insert({
     id,
     code: "LOCAL",

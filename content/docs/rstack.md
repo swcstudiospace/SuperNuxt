@@ -1,3 +1,10 @@
+---
+title: "Rstack"
+description: "Rspack, Rsbuild, Rslib, Rspress, Rsdoctor, Rstest, Rslint, and the CLI."
+section: Integrations
+order: 7
+---
+
 Nuxt serves the app with Vite. Rstack builds the pieces around it: the core library, the tests, the linter, the formatter, the static console, and a second docs site.
 
 ## Commands

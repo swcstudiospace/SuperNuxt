@@ -7,14 +7,9 @@ import {
   tableFeatures,
   useTable,
 } from "@tanstack/vue-table";
-import type { Mission } from "../../../shared/missions";
+const board = useMissionBoard();
 
-const { data, isPending, isError, error, suspense } = useQuery({
-  queryKey: ["missions", "live"],
-  queryFn: () => $fetch<Mission[]>("/api/missions"),
-});
-
-if (import.meta.server) await suspense();
+if (import.meta.server) await board.prefetch();
 
 const features = tableFeatures({
   rowSortingFeature,
@@ -31,7 +26,7 @@ const columns = [
   { accessorKey: "deltaV", header: "Delta-v" },
 ];
 
-const rows = computed(() => data.value ?? []);
+const rows = computed(() => [...board.missions.value]);
 const table = useTable({
   features,
   columns,
@@ -46,9 +41,9 @@ const table = useTable({
     lede="Headless table state, including sort, comes from TanStack Table v9. The markup is ours."
   />
 
-  <p v-if="isPending">Loading rows…</p>
-  <p v-else-if="isError" class="error" role="alert">
-    {{ error instanceof Error ? error.message : "The table failed to load." }}
+  <p v-if="board.pending.value">Loading rows…</p>
+  <p v-else-if="board.isError.value" class="error" role="alert">
+    {{ board.error.value?.message ?? "The table failed to load." }}
   </p>
   <div v-else class="paper table-wrap">
     <table>

@@ -1,3 +1,10 @@
+---
+title: "Server functions"
+description: "How useServerFn calls a named Nitro handler."
+section: Integrations
+order: 6
+---
+
 `useServerFn` is SuperNuxt's stand-in for a TanStack Start server function. The client calls a named function. Nitro validates the body and runs the handler.
 
 ## Call one

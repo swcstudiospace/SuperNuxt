@@ -4,6 +4,10 @@ import {
   createResolver,
   defineNuxtModule,
 } from "@nuxt/kit";
+import {
+  parseSuperNuxtOptions,
+  superNuxtDefaults,
+} from "../../src/domain/options";
 
 export interface SuperNuxtOptions {
   queryDevtools: boolean;
@@ -18,17 +22,12 @@ export default defineNuxtModule<SuperNuxtOptions>({
       nuxt: ">=4.0.0",
     },
   },
-  defaults: {
-    queryDevtools: true,
-    staleTime: 30_000,
-  },
+  defaults: superNuxtDefaults,
   setup(options, nuxt) {
     const resolver = createResolver(import.meta.url);
+    const parsed = parseSuperNuxtOptions(options);
 
-    nuxt.options.runtimeConfig.public.supernuxt = {
-      staleTime: options.staleTime,
-      queryDevtools: options.queryDevtools,
-    };
+    nuxt.options.runtimeConfig.public.supernuxt = parsed;
 
     nuxt.options.build.transpile.push("@tanstack/vue-query");
     addPlugin(resolver.resolve("./runtime/query"));
@@ -48,6 +47,14 @@ export default defineNuxtModule<SuperNuxtOptions>({
       {
         name: "useServerFn",
         from: resolver.resolve("./runtime/useServerFn"),
+      },
+      {
+        name: "useMissionBoard",
+        from: resolver.resolve("./runtime/useMissionBoard"),
+      },
+      {
+        name: "useSuperNuxt",
+        from: resolver.resolve("./runtime/useSuperNuxt"),
       },
     ]);
   },

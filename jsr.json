@@ -4,7 +4,7 @@
   "license": "MIT",
   "exports": {
     ".": "./src/index.ts",
-    "./module": "./modules/supernuxt/index.ts"
+    "./nuxt": "./modules/supernuxt/index.ts"
   },
   "publish": {
     "include": [

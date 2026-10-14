@@ -1,3 +1,10 @@
+---
+title: "Publish"
+description: "npm and JSR package names for the framework and the scaffolder."
+section: Ship
+order: 9
+---
+
 SuperNuxt is published to npm twice and to JSR twice: the framework, and the scaffolder.
 
 ## npm

@@ -1,27 +1,15 @@
-import { serverFns, type ServerFnName } from "../../../fns/registry";
-
-function isServerFn(name: string): name is ServerFnName {
-  return name in serverFns;
-}
+import { dispatchServerFn } from "../../../../src/domain/contracts";
+import { ledger } from "../../../ledger";
 
 export default defineEventHandler(async (event) => {
   const name = getRouterParam(event, "name") ?? "";
-  if (!isServerFn(name)) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: `Unknown server function "${name}".`,
-    });
-  }
   const body = await readBody(event);
-  try {
-    return serverFns[name](body);
-  } catch (error) {
-    if (error && typeof error === "object" && "statusCode" in error)
-      throw error;
+  const result = dispatchServerFn(name, body, ledger.list());
+  if (!result.ok) {
     throw createError({
-      statusCode: 400,
-      statusMessage:
-        error instanceof Error ? error.message : "Server function failed.",
+      statusCode: result.status,
+      statusMessage: result.message,
     });
   }
+  return result.value;
 });

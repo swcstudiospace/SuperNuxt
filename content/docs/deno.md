@@ -1,3 +1,10 @@
+---
+title: "Deno"
+description: "Deno tasks, JSR package names, and how the scaffolder runs."
+section: Ship
+order: 8
+---
+
 Deno runs the scaffolder and the framework tasks. The Nuxt app itself is the same package Node, Bun, and Deno install from npm.
 
 ## Tasks in this repository

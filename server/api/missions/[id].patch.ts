@@ -1,18 +1,16 @@
-import { missionStatuses, type MissionStatus } from "../../../shared/missions";
-import { updateMissionStatus } from "../../utils/board";
+import { parseStatusChange } from "../../../src/domain/ledger";
+import { ledger } from "../../ledger";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
-  const body = await readBody<{ status?: MissionStatus }>(event);
-  if (!id || !body?.status || !missionStatuses.includes(body.status)) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Mission id and a known status are required.",
-    });
+  const body = await readBody(event);
+  const parsed = parseStatusChange({ ...(body ?? {}), id });
+  if (!parsed.ok) {
+    throw createError({ statusCode: 400, statusMessage: parsed.message });
   }
-  const mission = updateMissionStatus(id, body.status);
-  if (!mission) {
+  const result = ledger.apply(parsed.change);
+  if (!result.ok) {
     throw createError({ statusCode: 404, statusMessage: "Unknown mission" });
   }
-  return mission;
+  return result.mission;
 });

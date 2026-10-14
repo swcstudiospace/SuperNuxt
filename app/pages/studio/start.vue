@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { Briefing } from "../../../server/fns/registry";
 import { missions } from "../../../shared/missions";
 
-const briefingFn = useServerFn<Briefing, { missionId: string }>("briefing");
+const briefingFn = useServerFn("briefing");
 const missionId = ref(missions[0]?.id ?? "");
-const result = ref<Briefing | null>(null);
+const result = ref<Awaited<ReturnType<typeof briefingFn.call>> | null>(null);
 const error = ref("");
 const pending = ref(false);
 

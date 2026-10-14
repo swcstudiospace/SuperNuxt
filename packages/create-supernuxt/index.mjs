@@ -1,10 +1,15 @@
 #!/usr/bin/env node
+import { readFileSync } from "node:fs";
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const version = "0.2.0";
 const here = dirname(fileURLToPath(import.meta.url));
+const scaffolderPackage = JSON.parse(
+  readFileSync(join(here, "package.json"), "utf8"),
+);
+const version = scaffolderPackage.version;
+const nuxtPin = scaffolderPackage.supernuxt.nuxt;
 
 const help = `SuperNuxt scaffolder ${version}
 
@@ -19,7 +24,7 @@ Usage
 Options
   --dir <path>     Target directory (default: supernuxt-app)
   --pm <name>      npm, pnpm, bun, or deno. Prints matching commands.
-  --framework <p>  Dependency spec for supernuxt (default: ^${version})
+  --framework <p>  Dependency spec for supernuxt (default: ^<version>)
   --force          Write into a directory that already has files
   --yes            Accepted for non-interactive runners
   --help           Show this message
@@ -71,7 +76,7 @@ function files(framework, name) {
           postinstall: "nuxt prepare",
         },
         dependencies: {
-          nuxt: "4.6.1",
+          nuxt: nuxtPin,
           supernuxt: framework,
           vue: "^3.5.22",
           "vue-router": "^4.5.1",
@@ -114,9 +119,9 @@ dist
     "deno.json": `{
   "nodeModulesDir": "auto",
   "tasks": {
-    "dev": "deno run -A npm:nuxt@4.6.1 dev",
-    "build": "deno run -A npm:nuxt@4.6.1 build",
-    "preview": "deno run -A npm:nuxt@4.6.1 preview"
+    "dev": "deno run -A npm:nuxt@${nuxtPin} dev",
+    "build": "deno run -A npm:nuxt@${nuxtPin} build",
+    "preview": "deno run -A npm:nuxt@${nuxtPin} preview"
   }
 }
 `,

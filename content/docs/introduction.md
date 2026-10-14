@@ -1,3 +1,10 @@
+---
+title: "Introduction"
+description: "What SuperNuxt is and where the landing page, docs, and studio live."
+section: Start
+order: 1
+---
+
 SuperNuxt is a Nuxt 4 framework. Install it and the dev server opens a white and emerald landing page, with this documentation site beside it and a studio for the TanStack libraries.
 
 The package is a Nuxt layer. A new app extends that layer, so the landing page, the docs, and the studio ship with the framework. You add pages only when you are ready to replace a default.

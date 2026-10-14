@@ -1,5 +1,6 @@
 import { EventType, type TextAdapter } from "@tanstack/ai";
 import { composeDeskReply } from "../../src/desk-reply";
+import { ledger } from "../ledger";
 
 interface LooseMessage {
   role?: string;
@@ -50,7 +51,10 @@ export const deskAdapter = {
     const threadId = options.threadId || "supernuxt-desk";
     const runId = options.runId || `desk-${Date.now()}`;
     const messageId = `msg-${runId}`;
-    const reply = composeDeskReply(lastUserText(options.messages ?? []));
+    const reply = composeDeskReply(
+      lastUserText(options.messages ?? []),
+      ledger.list(),
+    );
 
     yield {
       type: EventType.RUN_STARTED,
