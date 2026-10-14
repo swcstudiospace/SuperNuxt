@@ -4,6 +4,14 @@
   "type": "module",
   "license": "MIT",
   "description": "Nuxt 4 framework with TanStack, Rstack, a landing page, and built-in documentation.",
+  "homepage": "https://github.com/swcstudiospace/SuperNuxt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swcstudiospace/SuperNuxt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/swcstudiospace/SuperNuxt/issues"
+  },
   "keywords": [
     "tanstack-intent",
     "nuxt",

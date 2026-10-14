@@ -119,16 +119,14 @@ describe("doc corpus", () => {
     );
     expect(pages[0]?.href).toBe("/docs");
     expect(pages.map((page) => page.slug)).toEqual([
-      "introduction",
-      "installation",
+      "architecture",
       "usage",
-      "module",
-      "branding",
-      "tanstack",
-      "server-functions",
-      "rstack",
-      "deno",
-      "publish",
+      "information",
+    ]);
+    expect(pages.map((page) => page.section)).toEqual([
+      "Architecture",
+      "Usage",
+      "Information",
     ]);
   });
 });

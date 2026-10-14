@@ -2,6 +2,15 @@
   "name": "create-supernuxt",
   "version": "0.2.0",
   "description": "Scaffold a SuperNuxt app with the landing page and documentation site.",
+  "homepage": "https://github.com/swcstudiospace/SuperNuxt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swcstudiospace/SuperNuxt.git",
+    "directory": "packages/create-supernuxt"
+  },
+  "bugs": {
+    "url": "https://github.com/swcstudiospace/SuperNuxt/issues"
+  },
   "type": "module",
   "license": "MIT",
   "bin": {

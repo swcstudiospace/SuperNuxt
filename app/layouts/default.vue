@@ -92,7 +92,7 @@ const filteredDocs = computed(() => {
           <input
             v-model="query"
             type="search"
-            placeholder="Install, Query, Deno"
+            placeholder="Layer, Query, publish"
           />
         </label>
         <div v-for="group in docSections" :key="group" class="rail-group">

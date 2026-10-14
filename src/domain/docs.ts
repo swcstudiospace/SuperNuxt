@@ -1,9 +1,4 @@
-export const docSections = [
-  "Start",
-  "Framework",
-  "Integrations",
-  "Ship",
-] as const;
+export const docSections = ["Architecture", "Usage", "Information"] as const;
 
 export type DocSection = (typeof docSections)[number];
 
@@ -54,7 +49,7 @@ export function parseDocSource(filename: string, source: string): DocPage {
   const slug = filename.replace(/\.md$/, "").split("/").pop() ?? filename;
   return {
     slug,
-    href: slug === "introduction" ? "/docs" : `/docs/${slug}`,
+    href: slug === "architecture" ? "/docs" : `/docs/${slug}`,
     title,
     description,
     section: section as DocSection,

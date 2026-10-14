@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/swcstudiospace/SuperNuxt/security/advisories/new
+    about: Report a vulnerability in private. This repository has no production secrets. Do not open a public issue.

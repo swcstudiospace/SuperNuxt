@@ -1,0 +1,65 @@
+name: Bug report
+description: SuperNuxt does not behave as the in-app docs describe.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. SuperNuxt is a framework repository and does not store production secrets. Do not paste tokens, passwords, or private environment values.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened
+      description: What you expected, and what the layer, module, or scaffolder did instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The command you ran (`npm create supernuxt`, `npx supernuxt`, `npm run create`, or a module setup) and the smallest config that shows the problem.
+      placeholder: |
+        npm create supernuxt@latest repro
+        cd repro
+        npm install
+        npm run dev
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: SuperNuxt version
+      description: The version of `supernuxt` or `create-supernuxt`. Current release is 0.2.0.
+      placeholder: "0.2.0"
+    validations:
+      required: true
+  - type: input
+    id: nuxt
+    attributes:
+      label: Nuxt version
+      description: The layer pins Nuxt 4.6.1. Say what your app resolved.
+      placeholder: "4.6.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: How you installed or ran it
+      options:
+        - npm create supernuxt
+        - pnpm create supernuxt
+        - bunx create-supernuxt
+        - npx create-supernuxt
+        - npx supernuxt
+        - deno run jsr:@supernuxt/create
+        - npm run create from a clone
+        - 'modules: ["supernuxt"] in an existing app'
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Command output or the Nuxt error. Redact anything that is not needed to see the failure.
+      render: shell

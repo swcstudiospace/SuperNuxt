@@ -1,0 +1,42 @@
+name: Feature request
+description: Propose a change to the layer, the module, the studio, the scaffolder, or the in-app docs.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        SuperNuxt docs cover architecture, usage, and install/publish information. A feature request should say which of those a user would touch.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What you cannot do with the layer, the module, or the scaffolder today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: The behavior you want, and whether it belongs in the layer (`extends`), the module only, or the scaffolder.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Layer and pages
+        - Module and auto-imports
+        - Server functions or the mission ledger
+        - TanStack studio
+        - Rstack toolchain
+        - Scaffolder and publishing
+        - In-app docs
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Links to a page under `/docs`, a studio route, or an issue. Optional.

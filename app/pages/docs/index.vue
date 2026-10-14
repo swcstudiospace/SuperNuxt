@@ -3,7 +3,7 @@ import { docPages, neighbors } from "../../../shared/docs";
 
 const page = docPages[0];
 if (!page) {
-  throw createError({ statusCode: 404, statusMessage: "Missing introduction" });
+  throw createError({ statusCode: 404, statusMessage: "Missing architecture" });
 }
 const { previous, next } = neighbors(page.slug);
 </script>
