@@ -1,44 +1,73 @@
 <script setup lang="ts">
 import { navGroups, studioNav } from "../../shared/nav";
+import { docPages, docSections } from "../../shared/docs";
 
 const route = useRoute();
 const helpOpen = ref(false);
+const query = ref("");
+
+const section = computed(() => {
+  if (route.path.startsWith("/docs")) return "docs";
+  if (route.path.startsWith("/studio")) return "studio";
+  return "home";
+});
 
 useHotkey(
   "Mod+/",
   () => {
     helpOpen.value = !helpOpen.value;
   },
-  { ignoreInputs: true },
+  { ignoreInputs: true, conflictBehavior: "replace" },
 );
 
 function isActive(href: string) {
-  if (href === "/") return route.path === "/";
+  if (href === "/studio") return route.path === "/studio";
   return route.path === href || route.path.startsWith(`${href}/`);
 }
+
+const filteredDocs = computed(() => {
+  const needle = query.value.trim().toLowerCase();
+  if (!needle) return docPages;
+  return docPages.filter((page) =>
+    `${page.title} ${page.description} ${page.body}`
+      .toLowerCase()
+      .includes(needle),
+  );
+});
 </script>
 
 <template>
   <div class="shell">
     <header class="top">
-      <NuxtLink class="mark" to="/">Super<span>Nuxt</span></NuxtLink>
+      <BrandLockup />
       <p class="top-note">Nuxt 4.6 · TanStack · Rstack</p>
-      <div class="top-actions">
-        <button class="ghost" type="button" @click="helpOpen = true">
+      <nav class="top-links" aria-label="Primary">
+        <NuxtLink to="/docs" :class="{ active: section === 'docs' }"
+          >Docs</NuxtLink
+        >
+        <NuxtLink to="/studio" :class="{ active: section === 'studio' }"
+          >Studio</NuxtLink
+        >
+        <button
+          v-if="section === 'studio'"
+          class="ghost"
+          type="button"
+          @click="helpOpen = true"
+        >
           Shortcuts
         </button>
-      </div>
+      </nav>
     </header>
 
-    <details class="mobile-nav">
-      <summary>Sections</summary>
+    <details v-if="section === 'studio'" class="mobile-nav">
+      <summary>Studio sections</summary>
       <NuxtLink v-for="item in studioNav" :key="item.href" :to="item.href">
         {{ item.label }}
       </NuxtLink>
     </details>
 
-    <div class="body">
-      <nav class="rail" aria-label="Studio">
+    <div class="body" :class="{ 'body-home': section === 'home' }">
+      <nav v-if="section === 'studio'" class="rail" aria-label="Studio">
         <div v-for="group in navGroups" :key="group" class="rail-group">
           <p class="rail-label">{{ group }}</p>
           <NuxtLink
@@ -51,12 +80,44 @@ function isActive(href: string) {
           </NuxtLink>
         </div>
       </nav>
+
+      <nav
+        v-else-if="section === 'docs'"
+        class="rail docs-side"
+        aria-label="Documentation"
+      >
+        <label>
+          Search docs
+          <input
+            v-model="query"
+            type="search"
+            placeholder="Install, Query, Deno"
+          />
+        </label>
+        <div v-for="group in docSections" :key="group" class="rail-group">
+          <p class="rail-label">{{ group }}</p>
+          <NuxtLink
+            v-for="page in filteredDocs.filter(
+              (item) => item.section === group,
+            )"
+            :key="page.slug"
+            :class="{ active: route.path === page.href }"
+            :to="page.href"
+          >
+            {{ page.title }}
+          </NuxtLink>
+        </div>
+        <p v-if="!filteredDocs.length" class="meta">
+          No pages match that search.
+        </p>
+      </nav>
+
       <main class="stage">
         <slot />
       </main>
     </div>
 
-    <DevtoolsDock />
+    <DevtoolsDock v-if="section === 'studio'" />
 
     <div v-if="helpOpen" class="help-layer" @click.self="helpOpen = false">
       <div class="paper help-card" role="dialog" aria-labelledby="help-title">
@@ -64,10 +125,6 @@ function isActive(href: string) {
         <p>
           Mod+/ toggles this card. On the hotkeys bench, J and K move the pad
           cursor.
-        </p>
-        <p class="meta">
-          The TanStack devtools dock sits on this shell. Vue Query has its own
-          panel inside it.
         </p>
         <button
           class="paper-button primary"

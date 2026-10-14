@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Briefing } from "../../server/fns/registry";
-import { missions } from "../../shared/missions";
+import type { Briefing } from "../../../server/fns/registry";
+import { missions } from "../../../shared/missions";
 
 const briefingFn = useServerFn<Briefing, { missionId: string }>("briefing");
 const missionId = ref(missions[0]?.id ?? "");

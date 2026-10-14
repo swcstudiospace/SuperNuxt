@@ -15,6 +15,8 @@
       the wiring. Hide it with <code>supernuxt.queryDevtools: false</code> if a
       deployment should not show it.
     </p>
-    <NuxtLink class="paper-button" to="/query">Open the manifest</NuxtLink>
+    <NuxtLink class="paper-button" to="/studio/query"
+      >Open the manifest</NuxtLink
+    >
   </div>
 </template>

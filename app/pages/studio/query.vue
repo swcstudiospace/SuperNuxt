@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Mission, MissionStatus } from "../../shared/missions";
-import { missionStatuses } from "../../shared/missions";
+import type { Mission, MissionStatus } from "../../../shared/missions";
+import { missionStatuses } from "../../../shared/missions";
 
 const fault = ref(false);
 const queryClient = useQueryClient();

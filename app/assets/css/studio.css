@@ -1,23 +1,24 @@
 :root {
-  color-scheme: dark;
-  --bg: #12140f;
-  --bg-2: #1b1e16;
-  --ink: #f6f1e6;
-  --muted: #b7b09f;
-  --dim: #847d6e;
-  --line: rgba(246, 241, 230, 0.14);
-  --acid: #dff25a;
-  --acid-ink: #1a1c0c;
-  --ember: #e85d3a;
-  --sea: #1f6b52;
-  --paper: #f4efe4;
-  --paper-ink: #1c1b16;
-  --paper-muted: #5e594e;
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-2: #f3faf6;
+  --ink: #10231c;
+  --muted: #4d665c;
+  --dim: #6d857b;
+  --line: #d7ebe3;
+  --acid: #009567;
+  --emerald: #009567;
+  --acid-ink: #ffffff;
+  --ember: #c2410c;
+  --sea: #009567;
+  --paper: #ffffff;
+  --paper-ink: #10231c;
+  --paper-muted: #4d665c;
+  --shadow: 0 18px 40px rgba(0, 149, 103, 0.08);
   --serif: "Fraunces", "Iowan Old Style", Palatino, serif;
   --sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
-  --rail: 15.5rem;
+  --rail: 16rem;
 }
 
 * {
@@ -34,9 +35,9 @@ body {
   margin: 0;
   background:
     radial-gradient(
-      1200px 500px at 10% -10%,
-      rgba(223, 242, 90, 0.08),
-      transparent 55%
+      900px 420px at 0% -10%,
+      rgba(0, 149, 103, 0.08),
+      transparent 60%
     ),
     var(--bg);
   color: var(--ink);
@@ -72,7 +73,7 @@ a {
   gap: 1rem;
   padding: 0.85rem 1.25rem;
   border-bottom: 1px solid var(--line);
-  background: rgba(18, 20, 15, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   position: sticky;
   top: 0;
   z-index: 5;
@@ -87,8 +88,34 @@ a {
   font-size: 1.35rem;
 }
 
-.mark span {
-  color: var(--acid);
+.mark span,
+.lockup-name span {
+  color: var(--emerald);
+}
+
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.lockup-mark {
+  display: block;
+  flex: none;
+}
+
+.lockup-name {
+  font-family: var(--serif);
+  font-weight: 680;
+  letter-spacing: -0.04em;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.lockup.hero .lockup-name {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
 }
 
 .top-note {
@@ -135,9 +162,13 @@ a {
 }
 
 .body {
+  display: block;
+  min-height: calc(100vh - 58px);
+}
+
+.body:has(.rail) {
   display: grid;
   grid-template-columns: var(--rail) minmax(0, 1fr);
-  min-height: calc(100vh - 58px);
 }
 
 .rail {
@@ -231,7 +262,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 1rem;
   padding: 1rem;
-  background: rgba(27, 30, 22, 0.72);
+  background: #ffffff;
 }
 
 .card a {
@@ -343,7 +374,7 @@ th button {
 .error {
   border: 1px solid rgba(232, 93, 58, 0.45);
   background: rgba(232, 93, 58, 0.08);
-  color: #ffd0c4;
+  color: #9a3412;
   border-radius: 0.8rem;
   padding: 0.8rem 1rem;
 }
@@ -357,8 +388,9 @@ th button {
   height: 24rem;
   overflow: auto;
   border-radius: 0.8rem;
-  background: #171910;
-  color: #d7d2c4;
+  background: #f4fbf7;
+  color: #10231c;
+  border: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 0.82rem;
 }
@@ -474,9 +506,117 @@ th button {
   min-height: 18rem;
 }
 
+.top-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+}
+
+.top-links a {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+}
+
+.top-links a.active,
+.top-links a:hover {
+  background: var(--bg-2);
+  color: var(--emerald);
+}
+
+.home {
+  max-width: 74rem;
+}
+
+.hero {
+  display: grid;
+  gap: 1.25rem;
+  padding: 2.5rem 0 1rem;
+}
+
+.hero-copy {
+  max-width: 40rem;
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: #f7fcf9;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+}
+
+.banner {
+  width: min(100%, 52rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: white;
+}
+
+.docs-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 42rem) 12rem;
+  gap: 2rem;
+  align-items: start;
+}
+
+.docs-layout h1 {
+  font-size: clamp(2rem, 4vw, 3.1rem);
+}
+
+.docs-side a {
+  display: block;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.28rem 0.45rem;
+  border-radius: 0.45rem;
+}
+
+.docs-side a.active,
+.docs-side a:hover {
+  background: var(--bg-2);
+  color: var(--emerald);
+}
+
+.markdown h2,
+.markdown h3 {
+  scroll-margin-top: 5rem;
+}
+
+.markdown pre,
+.markdown code {
+  font-family: var(--mono);
+}
+
+.markdown pre {
+  background: #f4fbf7;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.9rem 1rem;
+  overflow: auto;
+}
+
+.toc a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.86rem;
+  padding: 0.2rem 0;
+}
+
 @media (max-width: 860px) {
-  .body {
-    grid-template-columns: 1fr;
+  .body,
+  .body:has(.rail) {
+    display: block;
   }
   .rail {
     display: none;
@@ -494,8 +634,12 @@ th button {
     margin: 0.35rem 0.45rem 0 0;
     color: var(--ink);
   }
-  .top-note {
+  .top-note,
+  .toc {
     display: none;
+  }
+  .docs-layout {
+    grid-template-columns: 1fr;
   }
   .stage {
     padding: 1rem 1rem 3rem;

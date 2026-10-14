@@ -1,18 +1,44 @@
 {
   "name": "supernuxt",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
   "type": "module",
-  "description": "Nuxt 4 framework that wires in the TanStack libraries and the Rstack toolchain.",
+  "license": "MIT",
+  "description": "Nuxt 4 framework with TanStack, Rstack, a landing page, and built-in documentation.",
   "keywords": [
     "tanstack-intent",
     "nuxt",
     "tanstack",
-    "rstack"
+    "rstack",
+    "supernuxt"
+  ],
+  "bin": {
+    "supernuxt": "./packages/create-supernuxt/index.mjs",
+    "create-supernuxt": "./packages/create-supernuxt/index.mjs"
+  },
+  "files": [
+    "app",
+    "modules",
+    "server",
+    "shared",
+    "src",
+    "content",
+    "packages/create-supernuxt",
+    "public/brand/mark.svg",
+    "public/brand/banner.jpg",
+    "public/favicon.svg",
+    "public/apple-touch-icon.png",
+    "nuxt.config.ts",
+    "deno.json",
+    "jsr.json",
+    "README.md"
   ],
   "exports": {
     ".": "./modules/supernuxt/index.ts",
-    "./core": "./src/index.ts"
+    "./core": "./src/index.ts",
+    "./cli": "./packages/create-supernuxt/index.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "nuxt dev --port 47821 --host 127.0.0.1",
@@ -28,9 +54,11 @@
     "lib": "rs lib",
     "rstack:dev": "rs dev --port 47831",
     "rstack:build": "rs build",
-    "doctor": "RSDOCTOR=true rs build"
+    "doctor": "RSDOCTOR=true rs build",
+    "create": "node packages/create-supernuxt/index.mjs"
   },
   "dependencies": {
+    "@nuxt/ui": "^4.11.3",
     "@tanstack/ai": "^0.69.0",
     "@tanstack/ai-vue": "^0.26.4",
     "@tanstack/charts": "^1.1.0",
@@ -52,6 +80,7 @@
     "@tanstack/vue-table": "^9.3.1",
     "@tanstack/vue-virtual": "^3.13.45",
     "nuxt": "4.6.1",
+    "tailwindcss": "^4.3.3",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1",
     "zod": "^4.1.12"

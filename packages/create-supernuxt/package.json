@@ -1,0 +1,21 @@
+{
+  "name": "create-supernuxt",
+  "version": "0.2.0",
+  "description": "Scaffold a SuperNuxt app with the landing page and documentation site.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "create-supernuxt": "./index.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "mark.svg",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22.21.0"
+  }
+}

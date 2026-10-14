@@ -10,14 +10,15 @@ function goHome() {
 
 <template>
   <main class="stage">
-    <p class="kicker">Fault</p>
-    <h1>The desk lost this page.</h1>
+    <BrandLockup />
+    <p class="kicker">Missing page</p>
+    <h1>That route is not in the layer.</h1>
     <p class="lede">
       {{ props.error.statusCode }}
       {{ props.error.statusMessage || props.error.message }}
     </p>
     <button class="solid" type="button" @click="goHome">
-      Back to the deck
+      Back to SuperNuxt
     </button>
   </main>
 </template>

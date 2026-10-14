@@ -7,7 +7,7 @@ import {
   tableFeatures,
   useTable,
 } from "@tanstack/vue-table";
-import type { Mission } from "../../shared/missions";
+import type { Mission } from "../../../shared/missions";
 
 const { data, isPending, isError, error, suspense } = useQuery({
   queryKey: ["missions", "live"],

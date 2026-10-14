@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useVirtualizer } from "@tanstack/vue-virtual";
-import { telemetryLine } from "../../shared/missions";
+import { telemetryLine } from "../../../shared/missions";
 
 const count = 5000;
 const parentRef = ref<HTMLElement | null>(null);

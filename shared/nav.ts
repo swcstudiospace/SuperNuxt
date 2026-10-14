@@ -6,23 +6,23 @@ export interface StudioLink {
 }
 
 export const studioNav: StudioLink[] = [
-  { href: "/", label: "Deck", group: "Studio" },
-  { href: "/query", label: "Query", group: "Data" },
-  { href: "/db", label: "DB", group: "Data" },
-  { href: "/store", label: "Store", group: "Data" },
-  { href: "/start", label: "Start", group: "Data" },
-  { href: "/ai", label: "AI", group: "Data" },
-  { href: "/table", label: "Table", group: "Interface" },
-  { href: "/charts", label: "Charts", group: "Interface" },
-  { href: "/form", label: "Form", group: "Interface" },
-  { href: "/ranger", label: "Ranger", group: "Interface" },
-  { href: "/virtual", label: "Virtual", group: "Performance" },
-  { href: "/pacer", label: "Pacer", group: "Performance" },
-  { href: "/hotkeys", label: "Hotkeys", group: "Behavior" },
-  { href: "/router", label: "Router", group: "Behavior" },
-  { href: "/prose", label: "Prose", group: "Behavior" },
-  { href: "/devtools", label: "Devtools", group: "Tooling" },
-  { href: "/rstack", label: "Rstack", group: "Tooling" },
+  { href: "/studio", label: "Deck", group: "Studio" },
+  { href: "/studio/query", label: "Query", group: "Data" },
+  { href: "/studio/db", label: "DB", group: "Data" },
+  { href: "/studio/store", label: "Store", group: "Data" },
+  { href: "/studio/start", label: "Start", group: "Data" },
+  { href: "/studio/ai", label: "AI", group: "Data" },
+  { href: "/studio/table", label: "Table", group: "Interface" },
+  { href: "/studio/charts", label: "Charts", group: "Interface" },
+  { href: "/studio/form", label: "Form", group: "Interface" },
+  { href: "/studio/ranger", label: "Ranger", group: "Interface" },
+  { href: "/studio/virtual", label: "Virtual", group: "Performance" },
+  { href: "/studio/pacer", label: "Pacer", group: "Performance" },
+  { href: "/studio/hotkeys", label: "Hotkeys", group: "Behavior" },
+  { href: "/studio/router", label: "Router", group: "Behavior" },
+  { href: "/studio/prose", label: "Prose", group: "Behavior" },
+  { href: "/studio/devtools", label: "Devtools", group: "Tooling" },
+  { href: "/studio/rstack", label: "Rstack", group: "Tooling" },
 ];
 
 export const navGroups = [
@@ -32,4 +32,12 @@ export const navGroups = [
   "Performance",
   "Behavior",
   "Tooling",
+] as const;
+
+export const installCommands = [
+  { id: "npm", label: "npm", command: "npm create supernuxt@latest" },
+  { id: "pnpm", label: "pnpm", command: "pnpm create supernuxt" },
+  { id: "bun", label: "bun", command: "bunx create-supernuxt" },
+  { id: "npx", label: "npx", command: "npx create-supernuxt@latest" },
+  { id: "deno", label: "deno", command: "deno run -A jsr:@supernuxt/create" },
 ] as const;

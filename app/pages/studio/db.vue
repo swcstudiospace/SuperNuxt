@@ -6,7 +6,7 @@ import {
   missionStatuses,
   type Mission,
   type MissionStatus,
-} from "../../shared/missions";
+} from "../../../shared/missions";
 
 const status = ref<"all" | MissionStatus>("all");
 

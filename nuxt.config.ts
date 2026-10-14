@@ -5,8 +5,12 @@ const require = createRequire(import.meta.url);
 export default defineNuxtConfig({
   compatibilityDate: "2026-10-14",
   telemetry: false,
-  modules: ["./modules/supernuxt"],
-  css: ["~/assets/css/studio.css"],
+  modules: ["@nuxt/ui", "./modules/supernuxt"],
+  css: ["~/assets/css/main.css", "~/assets/css/studio.css"],
+  colorMode: {
+    preference: "light",
+    fallback: "light",
+  },
   devtools: { enabled: false },
   build: {
     transpile: [
@@ -27,9 +31,17 @@ export default defineNuxtConfig({
             "SuperNuxt is a Nuxt 4 framework with TanStack Query, Table, Form, DB, AI, and the rest of the TanStack catalog, built with the Rstack toolchain.",
         },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { property: "og:title", content: "SuperNuxt" },
+        {
+          property: "og:description",
+          content:
+            "SuperNuxt is a Nuxt 4 framework with TanStack, Rstack, and a built-in documentation site.",
+        },
+        { property: "og:image", content: "/brand/banner.jpg" },
       ],
       link: [
         { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         {
           rel: "preconnect",
