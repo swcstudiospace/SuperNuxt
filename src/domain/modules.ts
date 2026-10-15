@@ -2,7 +2,11 @@ import { activateAuth, type AuthActivation } from "./auth";
 import type { ModuleEnv } from "./env";
 import type { SuperNuxtOptions } from "./options";
 import { planSentry, type SentryPlan } from "./sentry";
-import { securityModuleOptions, type SecurityModuleOptions } from "./security";
+import {
+  securityModuleOptions,
+  sentryConnectOrigin,
+  type SecurityModuleOptions,
+} from "./security";
 
 export const modulePackageNames = {
   image: "@nuxt/image",
@@ -35,7 +39,6 @@ export const legacyDocsRenderer = {
 } as const;
 
 export const siteDefaults = {
-  url: "https://github.com/swcstudiospace/SuperNuxt",
   name: "SuperNuxt",
   description: "Nuxt 4 framework with TanStack and a Rstack side console.",
 } as const;
@@ -153,7 +156,10 @@ export function resolveModulePlan(
   let security: SecurityModuleOptions | null = null;
   if (options.security) {
     const enabled = input.securityEnabled !== false;
-    security = securityModuleOptions(input.dev, enabled);
+    const connectOrigin = options.sentry
+      ? sentryConnectOrigin(env.sentryDsn)
+      : undefined;
+    security = securityModuleOptions(input.dev, enabled, connectOrigin);
     nuxtOptions.security = security;
     installs.push(install("security", { ...security }));
   }

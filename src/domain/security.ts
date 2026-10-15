@@ -39,10 +39,29 @@ export interface ContentSecurityPolicy {
   readonly "upgrade-insecure-requests": true;
 }
 
-export function contentSecurityPolicy(dev: boolean): ContentSecurityPolicy {
+/** Exact origin of a Sentry DSN, for `connect-src`. Scheme-wide sources are rejected. */
+export function sentryConnectOrigin(
+  dsn: string | undefined,
+): string | undefined {
+  if (!dsn) return undefined;
+  try {
+    const url = new URL(dsn);
+    if (url.protocol !== "https:" && url.protocol !== "http:") return undefined;
+    if (!url.host) return undefined;
+    return url.origin;
+  } catch {
+    return undefined;
+  }
+}
+
+export function contentSecurityPolicy(
+  dev: boolean,
+  connectOrigin?: string,
+): ContentSecurityPolicy {
   const scriptSrc = ["'self'", "'nonce-{{nonce}}'"];
   const styleSrc = ["'self'", "'unsafe-inline'", googleFontStyleHost];
   const connectSrc = ["'self'"];
+  if (connectOrigin) connectSrc.push(connectOrigin);
   const frameSrc = ["'self'"];
   if (dev) {
     scriptSrc.push("'unsafe-eval'", "'unsafe-inline'");
@@ -112,9 +131,10 @@ export interface SecurityModuleOptions {
 export function securityModuleOptions(
   dev: boolean,
   enabled: boolean,
+  connectOrigin?: string,
 ): SecurityModuleOptions {
   const headers = {
-    contentSecurityPolicy: contentSecurityPolicy(dev),
+    contentSecurityPolicy: contentSecurityPolicy(dev, connectOrigin),
   };
   assertClosedCsp(headers.contentSecurityPolicy, dev);
   return {

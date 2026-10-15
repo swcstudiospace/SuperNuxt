@@ -63,7 +63,6 @@ export function defineLayerConfig(configFileUrl: string): LayerFragment {
       processCSSVariables: false,
     },
     site: {
-      url: "https://github.com/swcstudiospace/SuperNuxt",
       name: "SuperNuxt",
       description: "Nuxt 4 framework with TanStack and a Rstack side console.",
     },

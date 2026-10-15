@@ -36,6 +36,9 @@
     "public/favicon.svg",
     "public/apple-touch-icon.png",
     "nuxt.config.ts",
+    "content.config.ts",
+    "sentry.client.config.ts",
+    "sentry.server.config.ts",
     "deno.json",
     "jsr.json",
     "README.md"
@@ -99,7 +102,7 @@
     "better-auth": "^1.7.8",
     "drizzle-orm": "^0.45.4",
     "nuxt": "4.6.1",
-    "nuxt-security": "^2.5.1",
+    "nuxt-security": "~2.5.1",
     "postgres": "^3.4.9",
     "tailwindcss": "^4.3.3",
     "vue": "^3.5.22",

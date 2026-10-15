@@ -68,13 +68,19 @@ export default defineNuxtModule<SuperNuxtOptions>({
   async setup(options, nuxt) {
     const resolver = createResolver(import.meta.url);
     const parsed = parseSuperNuxtOptions(options);
+    const env = readModuleEnv(process.env);
     const layerOptions = nuxt.options as unknown as Record<string, unknown>;
-    const plan = resolveModulePlan(parsed, readModuleEnv(process.env), {
+    const plan = resolveModulePlan(parsed, env, {
       dev: nuxt.options.dev,
       securityEnabled: securityEnabledOverride(layerOptions.security),
     });
 
-    nuxt.options.runtimeConfig.public.supernuxt = parsed;
+    const publicConfig = nuxt.options.runtimeConfig.public as {
+      supernuxt: SuperNuxtOptions;
+      sentryDsn: string;
+    };
+    publicConfig.supernuxt = parsed;
+    publicConfig.sentryDsn = plan.sentry.install ? (env.sentryDsn ?? "") : "";
 
     if (!parsed.devtools) {
       nuxt.options.devtools = { enabled: false };
@@ -112,7 +118,7 @@ export default defineNuxtModule<SuperNuxtOptions>({
     assignLayerOptions(layerOptions, plan.nuxtOptions);
 
     for (const spec of plan.installs) {
-      await installModule(spec.module, spec.options);
+      await installModule(spec.module);
     }
 
     if (plan.auth.registerRoute) {

@@ -20,6 +20,7 @@ import {
   contentSecurityPolicy,
   devOnlyCspTokens,
   securityModuleOptions,
+  sentryConnectOrigin,
 } from "./security";
 import { initSentry, planSentry } from "./sentry";
 import { skippedPackages, vitePwaSkipReason } from "./skips";
@@ -156,6 +157,18 @@ describe("module opt-out", () => {
     expect(
       securityModuleOptions(false, true).headers.contentSecurityPolicy,
     ).toEqual(production);
+    const origin = sentryConnectOrigin("https://public@o0.ingest.sentry.io/1");
+    expect(origin).toBe("https://o0.ingest.sentry.io");
+    const withSentry = contentSecurityPolicy(false, origin);
+    assertClosedCsp(withSentry, false);
+    expect(withSentry["connect-src"]).toContain("https://o0.ingest.sentry.io");
+    expect(withSentry["connect-src"]).not.toContain("https:");
+    const secured = plan(
+      { sentry: true },
+      { SENTRY_DSN: "https://public@o0.ingest.sentry.io/1" },
+    );
+    const policy = secured.security?.headers.contentSecurityPolicy;
+    expect(policy?.["connect-src"]).toContain("https://o0.ingest.sentry.io");
   });
 });
 
