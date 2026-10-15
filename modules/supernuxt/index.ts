@@ -22,32 +22,33 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
   return prototype === Object.prototype || prototype === null;
 }
 
-/** User config already on `nuxt.options` wins. Unset keys take the module plan. */
+/** User values win. Missing nested keys stay on the module plan. */
+function mergeLayerValue(planned: unknown, current: unknown): unknown {
+  if (current === undefined) return planned;
+  if (isPlainObject(planned) && isPlainObject(current)) {
+    const merged: Record<string, unknown> = { ...planned };
+    for (const [key, currentChild] of Object.entries(current)) {
+      merged[key] = mergeLayerValue(planned[key], currentChild);
+    }
+    return merged;
+  }
+  if (
+    Array.isArray(planned) &&
+    Array.isArray(current) &&
+    current.length === 0 &&
+    planned.length > 0
+  ) {
+    return planned;
+  }
+  return current;
+}
+
 function assignLayerOptions(
   target: Record<string, unknown>,
   additions: Readonly<Record<string, unknown>>,
 ) {
   for (const [key, value] of Object.entries(additions)) {
-    const current = target[key];
-    if (current === undefined) {
-      target[key] = value;
-      continue;
-    }
-    if (isPlainObject(current) && isPlainObject(value)) {
-      const merged: Record<string, unknown> = { ...value, ...current };
-      for (const [child, childValue] of Object.entries(value)) {
-        const currentChild = merged[child];
-        if (
-          Array.isArray(childValue) &&
-          childValue.length > 0 &&
-          Array.isArray(currentChild) &&
-          currentChild.length === 0
-        ) {
-          merged[child] = childValue;
-        }
-      }
-      target[key] = merged;
-    }
+    target[key] = mergeLayerValue(value, target[key]);
   }
 }
 

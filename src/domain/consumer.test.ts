@@ -40,6 +40,7 @@ describe("published layer", () => {
   compatibilityDate: "2026-10-14",
   image: { domains: ["cdn.example.test"] },
   i18n: { strategy: "prefix" },
+  security: { headers: { xFrameOptions: "DENY" } },
   supernuxt: {
     fonts: false,
     seo: false,
@@ -70,6 +71,8 @@ describe("published layer", () => {
           "connect-src"
         ] as string[] | undefined;
         expect(connect).toContain("https://o0.ingest.sentry.io");
+        expect(connect).toContain("'self'");
+        expect(nuxt.options.security?.headers?.xFrameOptions).toBe("DENY");
         const names = nuxt.options._installedModules.map(
           (item) => item.meta?.name,
         );
