@@ -122,11 +122,13 @@ describe("doc corpus", () => {
       "architecture",
       "usage",
       "information",
+      "modules",
     ]);
     expect(pages.map((page) => page.section)).toEqual([
       "Architecture",
       "Usage",
       "Information",
+      "Modules",
     ]);
   });
 });

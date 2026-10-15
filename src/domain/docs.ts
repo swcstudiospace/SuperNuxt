@@ -1,4 +1,9 @@
-export const docSections = ["Architecture", "Usage", "Information"] as const;
+export const docSections = [
+  "Architecture",
+  "Usage",
+  "Information",
+  "Modules",
+] as const;
 
 export type DocSection = (typeof docSections)[number];
 

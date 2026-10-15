@@ -36,6 +36,9 @@
     "public/favicon.svg",
     "public/apple-touch-icon.png",
     "nuxt.config.ts",
+    "content.config.ts",
+    "sentry.client.config.ts",
+    "sentry.server.config.ts",
     "deno.json",
     "jsr.json",
     "README.md"
@@ -55,6 +58,8 @@
     "preview": "nuxt preview --port 47821 --host 127.0.0.1",
     "postinstall": "nuxt prepare",
     "test": "rs test",
+    "test:component": "vitest run --config vitest.config.ts",
+    "test:e2e": "playwright test",
     "lint": "rs lint",
     "format": "rs fmt",
     "check": "rs check",
@@ -65,7 +70,15 @@
     "create": "node packages/create-supernuxt/index.mjs"
   },
   "dependencies": {
+    "@nuxt/content": "^3.16.2",
+    "@nuxt/fonts": "^1.0.1",
+    "@nuxt/hints": "^1.1.5",
+    "@nuxt/image": "^2.1.0",
+    "@nuxt/scripts": "^1.3.12",
     "@nuxt/ui": "^4.11.3",
+    "@nuxtjs/i18n": "^10.6.0",
+    "@nuxtjs/seo": "^6.0.1",
+    "@sentry/nuxt": "^11.7.0",
     "@tanstack/ai": "^0.69.0",
     "@tanstack/ai-vue": "^0.26.4",
     "@tanstack/charts": "^1.1.0",
@@ -86,19 +99,29 @@
     "@tanstack/vue-store": "^0.11.2",
     "@tanstack/vue-table": "^9.3.1",
     "@tanstack/vue-virtual": "^3.13.45",
+    "better-auth": "^1.7.8",
+    "drizzle-orm": "^0.45.4",
     "nuxt": "4.6.1",
+    "nuxt-security": "~2.5.1",
+    "postgres": "^3.4.9",
     "tailwindcss": "^4.3.3",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1",
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@nuxt/devtools": "^3.4.3",
+    "@nuxt/test-utils": "^4.3.3",
+    "@playwright/test": "^1.64.1",
     "@rsdoctor/core": "^1.6.5",
     "@tanstack/cli": "^0.71.1",
     "@tanstack/config": "^0.22.2",
     "@tanstack/intent": "^0.5.5",
+    "@vue/test-utils": "^2.5.1",
+    "happy-dom": "^20.14.6",
     "rstack": "^0.8.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
   },
   "engines": {
     "node": ">=22.21.0"
