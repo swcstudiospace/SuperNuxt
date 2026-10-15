@@ -25,7 +25,7 @@ Set them in `nuxt.config.ts`. The defaults below are what this repository ships.
 | `security` | `true`  | `nuxt-security`              | Removes the module, its headers, and its middleware. `security.enabled: false` is also honored: the module returns before it registers headers. The CSP has no `*` and no scheme-wide `https:`.                                                    |
 | `sentry`   | `true`  | `@sentry/nuxt`               | With no `SENTRY_DSN`, the module is not installed and `Sentry.init` is not called. `false` keeps it out even when a DSN is set. Tracing and replay are omitted. `SENTRY_AUTH_TOKEN` is used only at build time for source maps.                    |
 | `auth`     | `false` | `better-auth`, `drizzle-orm` | The default. `true` registers `/api/auth/**`. The handler still returns 404 and does not open Postgres until `BETTER_AUTH_SECRET` (32 characters or more) and a `postgres://` or `postgresql://` `DATABASE_URL` are both set. Boot never connects. |
-| `content`  | `false` | `@nuxt/content`              | The default. `content/docs` keeps the renderer in `src/domain/docs.ts`.                                                                                                                                                                            |
+| `content`  | `false` | `@nuxt/content`              | The default. `/docs` keeps the renderer in `src/domain/docs.ts`. `true` registers `@nuxt/content` and leaves that renderer in place.                                                                                                               |
 
 ```ts
 export default defineNuxtConfig({
@@ -64,6 +64,12 @@ nuxt-security `2.6` declares `engines.node` of `>=24`. This repository's engines
 Schema and the SQL file live in `server/db/schema.ts` and `server/db/migrations/0001_auth.sql`. SuperNuxt does not apply the SQL. GitHub OAuth is registered only when both `BETTER_AUTH_GITHUB_CLIENT_ID` and `BETTER_AUTH_GITHUB_CLIENT_SECRET` are set. `AUTH_SECRET` is accepted as an alias of `BETTER_AUTH_SECRET`. Names and empty placeholders are in `.env.example`. `SECURITY.md` lists the same names.
 
 TanStack DB (`@tanstack/vue-db`) stays the client collection on `/studio/db`. better-auth and drizzle are a server auth layer and do not replace it.
+
+## Content
+
+`supernuxt.content` defaults to `false`, so `/docs` keeps the renderer in `src/domain/docs.ts`, `shared/docs.ts`, and `app/pages/docs`. Set the flag to `true` to register `@nuxt/content`. The collection config is `content.config.ts` and reads `content/docs`. The legacy renderer stays in the tree either way. Turn the flag off to stop registering the module. Revert this commit if you want the package gone as well.
+
+The content module uses its own local SQLite database. That database is not `DATABASE_URL`. It is not opened while the flag is false. The connector is Node's `node:sqlite` (`experimental.sqliteConnector: "native"`), not a native addon. `rs build` does not run this step. Rstack still builds only the side console.
 
 ## Not included
 

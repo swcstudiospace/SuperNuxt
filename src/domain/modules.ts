@@ -170,7 +170,11 @@ export function resolveModulePlan(
   }
 
   if (options.content) {
-    installs.push(install("content", {}));
+    const content = {
+      experimental: { sqliteConnector: "native" as const },
+    };
+    nuxtOptions.content = content;
+    installs.push(install("content", content));
   }
 
   return {

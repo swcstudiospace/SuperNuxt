@@ -67,6 +67,7 @@
     "create": "node packages/create-supernuxt/index.mjs"
   },
   "dependencies": {
+    "@nuxt/content": "^3.16.2",
     "@nuxt/fonts": "^1.0.1",
     "@nuxt/hints": "^1.1.5",
     "@nuxt/image": "^2.1.0",

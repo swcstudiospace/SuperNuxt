@@ -370,6 +370,11 @@ describe("legacy docs renderer", () => {
     const enabled = plan({ content: true });
     expect(enabled.content.install).toBe(true);
     expect(installedModules(enabled)).toContain("@nuxt/content");
+    expect(
+      enabled.installs.find((item) => item.id === "content")?.options,
+    ).toEqual({
+      experimental: { sqliteConnector: "native" },
+    });
     expect(enabled.content.legacyRenderer).toEqual(legacyDocsRenderer);
     for (const path of Object.values(legacyDocsRenderer)) {
       expect(readFileSync(new URL(path, root), "utf8").length).toBeGreaterThan(
