@@ -1,3 +1,9 @@
-import { defineLayerConfig } from "./src/domain/layer";
+import type { NuxtConfig } from "nuxt/schema";
+import { defineLayerConfig } from "./config/layer";
 
-export default defineNuxtConfig(defineLayerConfig(import.meta.url));
+const layer = defineLayerConfig(import.meta.url) as unknown as NuxtConfig;
+
+export default defineNuxtConfig({
+  ...layer,
+  buildDir: ".nuxt",
+});

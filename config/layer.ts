@@ -25,10 +25,7 @@ function insideRoot(root: string, path: string): string {
  */
 export function defineLayerConfig(configFileUrl: string): LayerFragment {
   const root = dirname(fileURLToPath(configFileUrl));
-  const moduleEntry = insideRoot(
-    root,
-    join(root, "modules/supernuxt/index.ts"),
-  );
+  const moduleEntry = "@supernuxt/nuxt";
   const css = [
     insideRoot(root, join(root, "app/assets/css/main.css")),
     insideRoot(root, join(root, "app/assets/css/studio.css")),

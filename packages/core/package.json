@@ -1,0 +1,42 @@
+{
+  "name": "@supernuxt/core",
+  "version": "0.2.0",
+  "description": "Framework-agnostic SuperNuxt domain: stack catalog, mission ledger, server-fn contracts, docs and release helpers.",
+  "type": "module",
+  "homepage": "https://github.com/swcstudiospace/SuperNuxt",
+  "bugs": {
+    "url": "https://github.com/swcstudiospace/SuperNuxt/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swcstudiospace/SuperNuxt.git",
+    "directory": "packages/core"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.ts"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22.21.0"
+  }
+}
