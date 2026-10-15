@@ -19,7 +19,8 @@
   "files": [
     "index.mjs",
     "mark.svg",
-    "README.md"
+    "README.md",
+    "index.d.mts"
   ],
   "publishConfig": {
     "access": "public"
@@ -29,5 +30,6 @@
   },
   "supernuxt": {
     "nuxt": "4.6.1"
-  }
+  },
+  "types": "./index.d.mts"
 }

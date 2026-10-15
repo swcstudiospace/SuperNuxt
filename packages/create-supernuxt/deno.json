@@ -4,6 +4,6 @@
   "license": "MIT",
   "exports": "./index.mjs",
   "publish": {
-    "include": ["index.mjs", "mark.svg", "README.md", "jsr.json"]
+    "include": ["index.mjs", "mark.svg", "README.md", "jsr.json", "index.d.mts"]
   }
 }

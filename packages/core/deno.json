@@ -1,0 +1,13 @@
+{
+  "name": "@supernuxt/core",
+  "version": "0.2.0",
+  "license": "MIT",
+  "exports": "./src/index.ts",
+  "imports": {
+    "zod": "npm:zod@^4.1.12"
+  },
+  "publish": {
+    "include": ["src/**/*.ts", "README.md", "deno.json"],
+    "exclude": ["src/**/*.test.ts"]
+  }
+}
