@@ -1,5 +1,5 @@
 import { EventType, type TextAdapter } from "@tanstack/ai";
-import { composeDeskReply } from "@supernuxt/core";
+import { composeDeskReply } from "@swcstudio/supernuxt-core";
 import { ledger } from "../ledger";
 
 interface LooseMessage {

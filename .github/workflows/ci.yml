@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
 
-      - name: Install (builds @supernuxt/core and @supernuxt/nuxt)
+      - name: Install (builds @swcstudio/supernuxt-core and @swcstudio/supernuxt-nuxt)
         run: npm ci
 
       - name: Test

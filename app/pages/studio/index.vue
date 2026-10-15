@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { rstackTools, tanstackLibraries } from "@supernuxt/core";
+import { rstackTools, tanstackLibraries } from "@swcstudio/supernuxt-core";
 import { hrefFor } from "#layers/supernuxt/shared/nav";
 
 function cardHref(id: string) {

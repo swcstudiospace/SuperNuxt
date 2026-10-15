@@ -1,5 +1,5 @@
 {
-  "name": "@supernuxt/core",
+  "name": "@swcstudiospace/supernuxt-core",
   "version": "0.2.0",
   "license": "MIT",
   "exports": "./src/index.ts",

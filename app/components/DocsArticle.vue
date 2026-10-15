@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { parseMarkdown, renderHtml } from "@tanstack/markdown";
-import type { DocPage } from "@supernuxt/core";
+import type { DocPage } from "@swcstudio/supernuxt-core";
 
 const props = defineProps<{
   page: DocPage;

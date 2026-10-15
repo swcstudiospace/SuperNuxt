@@ -20,12 +20,12 @@ Usage
   bunx create-supernuxt [dir]
   npx create-supernuxt@latest [dir]
   npx supernuxt [dir]
-  deno run -A jsr:@supernuxt/create [dir]
+  deno run -A jsr:@swcstudiospace/create-supernuxt [dir]
 
 Options
   --dir <path>     Target directory (default: supernuxt-app)
   --pm <name>      npm, pnpm, bun, or deno. Prints matching commands.
-  --framework <p>  Dependency spec for supernuxt (default: ^<version>)
+  --framework <p>  Dependency spec for @swcstudio/supernuxt (default: ^<version>)
   --force          Write into a directory that already has files
   --yes            Accepted for non-interactive runners
   --help           Show this message
@@ -78,7 +78,7 @@ function files(framework, name) {
         },
         dependencies: {
           nuxt: nuxtPin,
-          supernuxt: framework,
+          "@swcstudio/supernuxt": framework,
           vue: "^3.5.22",
           "vue-router": "^4.5.1",
         },
@@ -87,7 +87,7 @@ function files(framework, name) {
       2,
     )}\n`,
     "nuxt.config.ts": `export default defineNuxtConfig({
-  extends: ["supernuxt"],
+  extends: ["@swcstudio/supernuxt"],
   telemetry: false,
   compatibilityDate: "2026-10-14",
   supernuxt: {

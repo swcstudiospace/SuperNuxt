@@ -10,8 +10,8 @@ metadata:
   library: supernuxt
   library_version: 0.2.0
 sources:
-  - "@supernuxt/nuxt:src/module.ts"
-  - "@supernuxt/nuxt:src/runtime/query.ts"
+  - "@swcstudio/supernuxt-nuxt:src/module.ts"
+  - "@swcstudio/supernuxt-nuxt:src/runtime/query.ts"
 requires: []
 ---
 
@@ -23,7 +23,7 @@ Add the module in `nuxt.config.ts`.
 
 ```ts
 export default defineNuxtConfig({
-  modules: ["supernuxt"],
+  modules: ["@swcstudio/supernuxt-nuxt"],
 });
 ```
 

@@ -29,8 +29,8 @@ describe("create-supernuxt", () => {
         "utf8",
       );
       expect(favicon).toBe(mark);
-      expect(pkg.dependencies.supernuxt).toBe("file:..");
-      expect(config).toContain('extends: ["supernuxt"]');
+      expect(pkg.dependencies["@swcstudio/supernuxt"]).toBe("file:..");
+      expect(config).toContain('extends: ["@swcstudio/supernuxt"]');
       expect(result.files).toContain("app/app.vue");
       expect(result.files).not.toContain("app/pages/index.vue");
     } finally {

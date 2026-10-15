@@ -2,7 +2,13 @@
   "$schema": "https://unpkg.com/@changesets/config@3/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["@supernuxt/core", "@supernuxt/nuxt", "create-supernuxt"]],
+  "fixed": [
+    [
+      "@swcstudio/supernuxt-core",
+      "@swcstudio/supernuxt-nuxt",
+      "create-supernuxt"
+    ]
+  ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",

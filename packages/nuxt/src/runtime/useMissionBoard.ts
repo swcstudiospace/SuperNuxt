@@ -1,8 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { $fetch } from "ofetch";
 import { computed, type ComputedRef, type Ref } from "vue";
-import { nextStatus } from "@supernuxt/core";
-import type { Mission } from "@supernuxt/core";
+import { nextStatus } from "@swcstudio/supernuxt-core";
+import type { Mission } from "@swcstudio/supernuxt-core";
 
 export interface MissionBoard {
   readonly missions: ComputedRef<readonly Mission[]>;

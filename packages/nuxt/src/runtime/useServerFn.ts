@@ -4,7 +4,7 @@ import {
   type ServerFnName,
   type ServerInput,
   type ServerOutput,
-} from "@supernuxt/core";
+} from "@swcstudio/supernuxt-core";
 
 type PostFetch = (
   url: string,

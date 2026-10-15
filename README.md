@@ -26,7 +26,7 @@ pnpm create supernuxt my-app
 bunx create-supernuxt my-app
 npx create-supernuxt@latest my-app
 npx supernuxt my-app
-deno run -A jsr:@supernuxt/create my-app
+deno run -A jsr:@swcstudiospace/create-supernuxt my-app
 ```
 
 `npm create supernuxt` downloads the npm package `create-supernuxt`. `npx supernuxt` runs the binary on the `supernuxt` package. Use `bunx`, not `bun create`.
