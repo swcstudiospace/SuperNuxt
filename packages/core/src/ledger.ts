@@ -2,7 +2,7 @@ import {
   missionStatuses,
   type Mission,
   type MissionStatus,
-} from "../../shared/missions";
+} from "./missions.ts";
 
 export interface StatusChange {
   readonly id: string;

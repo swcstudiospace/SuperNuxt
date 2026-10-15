@@ -32,13 +32,13 @@ define.lib({
   ],
   source: {
     entry: {
-      index: "./src/index.ts",
+      index: "./packages/core/src/index.ts",
     },
   },
 });
 
 define.test({
-  include: ["src/**/*.test.ts"],
+  include: ["test/**/*.test.ts"],
   testEnvironment: "node",
 });
 
@@ -51,6 +51,8 @@ define.lint([
       "**/public/rstack/**",
       "**/public/rstack-console/**",
       "**/.output/**",
+      "**/.planning/**",
+      "**/.claude/**",
     ],
   },
 ]);
@@ -65,5 +67,8 @@ define.fmt({
     ".nuxt/**",
     "dist/**",
     ".output/**",
+    ".planning/**",
+    ".claude/**",
+    "packages/*/dist/**",
   ],
 });

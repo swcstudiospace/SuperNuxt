@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Mission } from "../../shared/missions";
+import type { Mission } from "./missions.ts";
 
 export interface Briefing {
   readonly missionId: string;

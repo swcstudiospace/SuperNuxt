@@ -4,7 +4,7 @@ import {
   listIntegrationIds,
   rstackTools,
   tanstackLibraries,
-} from "./index";
+} from "../packages/core/src/index";
 
 describe("supernuxt catalog", () => {
   it("lists every TanStack library from the public catalog", () => {
@@ -51,8 +51,9 @@ describe("supernuxt catalog", () => {
   });
 
   it("briefs a known mission without calling a provider", async () => {
-    const { composeDeskReply } = await import("./desk-reply");
-    const { missions } = await import("../shared/missions");
+    const { composeDeskReply } =
+      await import("../packages/core/src/desk-reply");
+    const { missions } = await import("../packages/core/src/missions");
     expect(composeDeskReply("status of kite-4", missions)).toContain("KITE-4");
     expect(composeDeskReply("", missions)).toContain("Desk is listening");
   });

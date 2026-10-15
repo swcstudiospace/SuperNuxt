@@ -1,4 +1,4 @@
-import { rstackTools, tanstackLibraries } from "../src/index";
+import { rstackTools, tanstackLibraries } from "@supernuxt/core";
 
 export interface StudioLink {
   href: string;

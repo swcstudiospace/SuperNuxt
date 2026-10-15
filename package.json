@@ -25,12 +25,9 @@
   },
   "files": [
     "app",
-    "modules",
     "server",
     "shared",
-    "src",
     "content",
-    "packages/create-supernuxt",
     "public/brand/mark.svg",
     "public/brand/banner.jpg",
     "public/favicon.svg",
@@ -38,13 +35,13 @@
     "nuxt.config.ts",
     "deno.json",
     "jsr.json",
-    "README.md"
+    "README.md",
+    "config",
+    "packages/create-supernuxt/index.mjs",
+    "packages/create-supernuxt/mark.svg"
   ],
   "exports": {
-    ".": "./nuxt.config.ts",
-    "./nuxt": "./modules/supernuxt/index.ts",
-    "./core": "./src/index.ts",
-    "./cli": "./packages/create-supernuxt/index.mjs"
+    ".": "./nuxt.config.ts"
   },
   "publishConfig": {
     "access": "public"
@@ -53,7 +50,7 @@
     "dev": "nuxt dev --port 47821 --host 127.0.0.1",
     "build": "nuxt build",
     "preview": "nuxt preview --port 47821 --host 127.0.0.1",
-    "postinstall": "nuxt prepare",
+    "postinstall": "npm run build -w @supernuxt/core && nuxt prepare",
     "test": "rs test",
     "lint": "rs lint",
     "format": "rs fmt",
@@ -62,10 +59,13 @@
     "rstack:dev": "rs dev --port 47831",
     "rstack:build": "rs build",
     "doctor": "RSDOCTOR=true rs build",
-    "create": "node packages/create-supernuxt/index.mjs"
+    "create": "node packages/create-supernuxt/index.mjs",
+    "build:packages": "npm run build -w @supernuxt/core -w @supernuxt/nuxt --if-present"
   },
   "dependencies": {
     "@nuxt/ui": "^4.11.3",
+    "@supernuxt/core": "0.2.0",
+    "@supernuxt/nuxt": "0.2.0",
     "@tanstack/ai": "^0.69.0",
     "@tanstack/ai-vue": "^0.26.4",
     "@tanstack/charts": "^1.1.0",
@@ -102,5 +102,8 @@
   },
   "engines": {
     "node": ">=22.21.0"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

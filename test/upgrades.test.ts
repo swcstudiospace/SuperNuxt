@@ -1,18 +1,18 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "@rstest/core";
-import { dispatchServerFn } from "./domain/contracts";
-import { orderDocs, parseDocSource } from "./domain/docs";
-import { applyStatus, createLedger } from "./domain/ledger";
-import { defineLayerConfig } from "./domain/layer";
+import { dispatchServerFn } from "../packages/core/src/contracts";
+import { orderDocs, parseDocSource } from "../packages/core/src/docs";
+import { applyStatus, createLedger } from "../packages/core/src/ledger";
+import { defineLayerConfig } from "../config/layer";
 import {
   libraryVersion,
   readRelease,
   readScaffolderRelease,
-} from "./domain/release";
-import { listIntegrationIds } from "./index";
+} from "../packages/core/src/release";
+import { listIntegrationIds } from "../packages/core/src/index";
 import { hrefFor, studioPages } from "../shared/nav";
-import { missions } from "../shared/missions";
+import { missions } from "../packages/core/src/missions";
 
 const root = new URL("..", import.meta.url);
 
@@ -22,7 +22,7 @@ describe("layer entry", () => {
       new URL("../nuxt.config.ts", import.meta.url).href,
     );
     expect(config.$meta.name).toBe("supernuxt");
-    expect(config.modules[1]).toMatch(/modules\/supernuxt\/index\.ts$/);
+    expect(config.modules[1]).toBe("@supernuxt/nuxt");
     expect(config.css[0]).toMatch(/app\/assets\/css\/main\.css$/);
     expect(config.css[1]).toMatch(/app\/assets\/css\/studio\.css$/);
     expect(config).not.toHaveProperty("runtimeConfig");
@@ -68,8 +68,8 @@ describe("release pin", () => {
     expect(deno.version).toBe(release.version);
     expect(libraryVersion(skill)).toBe(release.version);
     expect(JSON.parse(rootPackage).exports["."]).toBe("./nuxt.config.ts");
-    expect(JSON.parse(rootPackage).exports["./nuxt"]).toBe(
-      "./modules/supernuxt/index.ts",
+    expect(JSON.parse(rootPackage).dependencies["@supernuxt/nuxt"]).toBe(
+      release.version,
     );
   });
 });

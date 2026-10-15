@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Ranger } from "@tanstack/ranger";
-import { missions } from "../../../shared/missions";
+import { missions } from "#shared/missions";
 
 const track = ref<HTMLDivElement | null>(null);
 const values = ref<number[]>([2000, 9000]);

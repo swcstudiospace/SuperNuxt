@@ -1,4 +1,4 @@
-import { dispatchServerFn } from "../../../../src/domain/contracts";
+import { dispatchServerFn } from "@supernuxt/core";
 import { ledger } from "../../../ledger";
 
 export default defineEventHandler(async (event) => {

@@ -9,7 +9,7 @@ export interface StackEntry {
   summary: string;
 }
 
-export const tanstackLibraries = [
+export const tanstackLibraries: readonly StackEntry[] = [
   {
     id: "start",
     name: "TanStack Start",
@@ -164,9 +164,9 @@ export const tanstackLibraries = [
     packageName: "@tanstack/intent",
     summary: "Agent skill shipped with the framework package.",
   },
-] as const satisfies readonly StackEntry[];
+];
 
-export const rstackTools = [
+export const rstackTools: readonly StackEntry[] = [
   {
     id: "rspack",
     name: "Rspack",
@@ -232,7 +232,7 @@ export const rstackTools = [
     packageName: "rstack",
     summary: "One CLI for build, test, lint, format, lib, and docs.",
   },
-] as const satisfies readonly StackEntry[];
+];
 
 const serverFnName = /^[a-z][a-z0-9-]*$/;
 
