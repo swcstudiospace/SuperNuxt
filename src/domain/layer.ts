@@ -46,7 +46,38 @@ export function defineLayerConfig(configFileUrl: string): LayerFragment {
       preference: "light",
       fallback: "light",
     },
-    devtools: { enabled: false },
+    devtools: { enabled: true },
+    image: {
+      provider: "ipx",
+    },
+    fonts: {
+      providers: {
+        adobe: false,
+        bunny: false,
+        fontshare: false,
+        fontsource: false,
+        google: false,
+        googleicons: false,
+        npm: false,
+      },
+      processCSSVariables: false,
+    },
+    site: {
+      url: "https://github.com/swcstudiospace/SuperNuxt",
+      name: "SuperNuxt",
+      description: "Nuxt 4 framework with TanStack and a Rstack side console.",
+    },
+    i18n: {
+      defaultLocale: "en",
+      locales: [{ code: "en", language: "en", name: "English" }],
+      strategy: "no_prefix",
+      detectBrowserLanguage: false,
+    },
+    scripts: {
+      registry: {},
+    },
+    linkChecker: { enabled: false },
+    skewProtection: false,
     build: {
       transpile: [
         "@tanstack/charts",

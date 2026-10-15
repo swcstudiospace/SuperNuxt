@@ -17,3 +17,6 @@ public/rstack-console
 .tanstack
 .playwright-mcp
 agent-tools
+test-results
+playwright-report
+blob-report

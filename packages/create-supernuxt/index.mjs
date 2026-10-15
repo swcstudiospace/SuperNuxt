@@ -92,6 +92,17 @@ function files(framework, name) {
   supernuxt: {
     staleTime: 30_000,
     queryDevtools: true,
+    image: true,
+    fonts: true,
+    seo: true,
+    scripts: true,
+    i18n: true,
+    hints: true,
+    devtools: true,
+    security: true,
+    sentry: true,
+    auth: false,
+    content: false,
   },
 });
 `,
