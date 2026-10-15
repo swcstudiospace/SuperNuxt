@@ -19,7 +19,7 @@ npm run check
 
 ## Documentation
 
-User docs live only in `content/docs` and render in the Nuxt app at `/docs`. Do not add a `docs/` site, Rspress config, or a second documentation build.
+User docs live only in `content/docs` and render in the Nuxt app at `/docs`. Do not add a `docs/` site or a second documentation build.
 
 Each page is markdown with frontmatter: `title`, `description`, `section`, and `order`. `section` is one of `Architecture`, `Usage`, or `Information`. The parser is `src/domain/docs.ts`. The corpus test in `src/upgrades.test.ts` lists the expected slugs. The architecture page is served at `/docs`.
 

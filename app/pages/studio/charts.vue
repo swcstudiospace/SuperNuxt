@@ -7,6 +7,10 @@ import { missions } from "../../../shared/missions";
 
 const focused = ref("");
 
+function onFocusChange(point: { y?: unknown } | null) {
+  focused.value = point ? String(point.y) : "";
+}
+
 const definition = computed(() =>
   defineChart({
     chart: () => ({
@@ -40,7 +44,7 @@ const definition = computed(() =>
       aria-label="Delta-v by mission code"
       :aspect-ratio="16 / 9"
       :initial-width="720"
-      @focus-change="focused = $event ? String($event.y) : ''"
+      :on-focus-change="onFocusChange"
     />
     <p class="meta">
       {{

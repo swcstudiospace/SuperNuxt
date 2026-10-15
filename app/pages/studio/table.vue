@@ -26,11 +26,15 @@ const columns = [
   { accessorKey: "deltaV", header: "Delta-v" },
 ];
 
-const rows = computed(() => [...board.missions.value]);
+const rows = computed({
+  get: () => [...board.missions.value],
+  set: () => undefined,
+});
 const table = useTable({
   features,
   columns,
-  data: rows,
+  // Vue Table's data ref wants an index signature Mission does not declare.
+  data: rows as never,
 });
 </script>
 

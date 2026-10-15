@@ -24,9 +24,9 @@ async function run() {
 
 <template>
   <PageIntro
-    kicker="TanStack Start"
+    kicker="Nitro"
     title="Server functions"
-    lede="Start itself is a React and Solid framework. SuperNuxt keeps the idea: a named function on the client, a Zod-checked Nitro handler on the server."
+    lede="A named function on the client, a Zod-checked Nitro handler on the server. SuperNuxt does not mount a separate React or Solid server framework."
   />
 
   <div class="paper stack">

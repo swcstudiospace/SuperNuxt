@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "description": "Group minor and patch updates into one pull request.",
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "description": "Keep dependencies.nuxt and packages/create-supernuxt supernuxt.nuxt on one exact pin, in one pull request.",
+      "matchPackageNames": ["nuxt"],
+      "groupName": "nuxt pin",
+      "groupSlug": "nuxt-pin",
+      "rangeStrategy": "pin"
+    },
+    {
+      "description": "examples/minimal depends on this checkout with file:../.. and is not a published package.",
+      "matchFileNames": ["examples/**"],
+      "enabled": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/packages/create-supernuxt/package.json/"],
+      "matchStrings": [
+        "\"supernuxt\"\\s*:\\s*\\{[\\s\\S]*?\"nuxt\"\\s*:\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "depNameTemplate": "nuxt",
+      "datasourceTemplate": "npm"
+    }
+  ]
+}

@@ -2,7 +2,6 @@ const tools = [
   ["Rspack", "Bundler under every Rstack command"],
   ["Rsbuild", "Built this page"],
   ["Rslib", "Builds the SuperNuxt core"],
-  ["Rspress", "Docs site"],
   ["Rsdoctor", "Build analysis"],
   ["Rstest", "Tests"],
   ["Rslint", "Lint"],

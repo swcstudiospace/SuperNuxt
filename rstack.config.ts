@@ -51,6 +51,7 @@ define.lint([
       "**/public/rstack/**",
       "**/public/rstack-console/**",
       "**/.output/**",
+      "**/examples/**",
     ],
   },
 ]);
@@ -65,5 +66,6 @@ define.fmt({
     ".nuxt/**",
     "dist/**",
     ".output/**",
+    "examples/**",
   ],
 });

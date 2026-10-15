@@ -7,7 +7,7 @@ order: 1
 
 SuperNuxt is a Nuxt 4.6 layer. The package entry `.` is `nuxt.config.ts`, which calls `defineLayerConfig` in `src/domain/layer.ts`. A consumer that extends the layer gets the module, the CSS, the landing page, this documentation, and the studio. The export `./nuxt` is the module alone, at `modules/supernuxt/index.ts`.
 
-Nuxt serves the app with Vite. Rstack builds the pieces around the repository: tests, lint, the core library, and the static console. User documentation is this Nuxt app. Pages are markdown in `content/docs`. There is no second docs site.
+Nuxt builds and serves the app with Vite. Rstack does not build the Nuxt app. It builds the side console, the tests, the lint pass, and the core library. User documentation is this Nuxt app. Pages are markdown in `content/docs`. There is no second docs site.
 
 ## Layer and module
 
@@ -49,7 +49,7 @@ Server functions read the ledger. They do not write it. `dispatchServerFn` in `s
 
 ## Server functions
 
-`useServerFn` is the stand-in for a TanStack Start server function. Start itself targets React and Solid, so SuperNuxt does not mount it. The client calls a named function. Nitro validates the body and runs the handler.
+`useServerFn` calls a named function on the client. Nitro validates the body and runs the handler. SuperNuxt does not mount a separate React or Solid server framework.
 
 ```ts
 const briefing = useServerFn("briefing");
@@ -71,7 +71,7 @@ The route is `server/api/__supernuxt/fn/[name].post.ts`. It looks the name up th
 | Query                  | `/studio/query`    | SSR dehydrate, hydrate, and a mutation |
 | DB                     | `/studio/db`       | A local collection and a live query    |
 | Store                  | `/studio/store`    | A client store with selectors          |
-| Start                  | `/studio/start`    | Server functions on Nitro              |
+| Nitro server functions | `/studio/start`    | Server functions on Nitro              |
 | AI                     | `/studio/ai`       | `useChat` against a local text adapter |
 | Table                  | `/studio/table`    | Headless sorting                       |
 | Charts                 | `/studio/charts`   | The Vue chart adapter                  |
@@ -90,7 +90,7 @@ When `queryDevtools` is true, studio routes mount the TanStack Devtools dock wit
 
 ## Rstack
 
-`rstack.config.ts` is the Rstack CLI config. `npm test`, `npm run lint`, `npm run format`, and `npm run check` go through the `rs` binary.
+Rstack does not build the Nuxt app. `rstack.config.ts` is the Rstack CLI config for the side console, tests, lint, and the core library. `npm test`, `npm run lint`, `npm run format`, and `npm run check` go through the `rs` binary.
 
 | Script                 | Tool       | What it does                                  |
 | ---------------------- | ---------- | --------------------------------------------- |
@@ -103,7 +103,7 @@ When `queryDevtools` is true, studio routes mount the TanStack Devtools dock wit
 | `npm run rstack:dev`   | Rsbuild    | Serves that console on port 47831             |
 | `npm run doctor`       | Rsdoctor   | A build report for the Rsbuild console        |
 
-Rspack is the bundler underneath Rsbuild, Rslib, and Rstest. Rspress ships inside the Rstack toolchain. SuperNuxt does not use it for a docs site. The pages you are reading are rendered by this app from `content/docs`.
+Rspack is the bundler underneath Rsbuild, Rslib, and Rstest. The pages you are reading are rendered by this Nuxt app from `content/docs`.
 
 TanStack Config, CLI, and Intent are installed for the framework, not for the studio benches. Config 0.22 has no root export, so `tooling/publish.ts` imports `@tanstack/config/publish`. Intent validates `skills/use-supernuxt/SKILL.md`.
 

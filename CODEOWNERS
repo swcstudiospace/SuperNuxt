@@ -1,0 +1,16 @@
+# Code owners for github.com/swcstudiospace/SuperNuxt.
+#
+# Ming is the merge authority. This repository's history does not record a
+# GitHub login for Ming. The only human author email, Ove Govender
+# <codingwithanabg@gmail.com> on 54ca35ac, has no linked GitHub account.
+# Reviews route to the organization that owns the repository (the same
+# pattern as swcstudiospace/omes-bot). Replace @swcstudiospace when a
+# personal login is confirmed. Do not invent one.
+
+* @swcstudiospace
+/app/ @swcstudiospace
+/server/ @swcstudiospace
+/modules/ @swcstudiospace
+/packages/ @swcstudiospace
+/rstack/ @swcstudiospace
+/.github/ @swcstudiospace
