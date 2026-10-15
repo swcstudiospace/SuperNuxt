@@ -14,10 +14,13 @@
     "directory": "packages/nuxt"
   },
   "exports": {
-    ".": "./src/module.ts"
+    ".": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs"
+    }
   },
   "files": [
-    "src"
+    "dist"
   ],
   "dependencies": {
     "@nuxt/kit": "^4.2.0",
@@ -64,5 +67,20 @@
   },
   "engines": {
     "node": ">=22.21.0"
+  },
+  "main": "./dist/module.mjs",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/types.d.mts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "nuxt-module-build prepare && nuxt-module-build build",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "^1.0.2"
   }
 }
