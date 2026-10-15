@@ -1,17 +1,12 @@
 {
-  "name": "@supernuxt/core",
-  "version": "0.2.0",
-  "exports": {
-    ".": "./src/index.ts",
-    "./nuxt": "./modules/supernuxt/index.ts",
-    "./cli": "./packages/create-supernuxt/index.mjs"
-  },
+  "workspace": ["./packages/core", "./packages/create-supernuxt"],
   "tasks": {
     "dev": "deno run -A npm:nuxt@4.6.1 dev --port 47821 --host 127.0.0.1",
     "create": "deno run -A packages/create-supernuxt/index.mjs",
-    "test": "deno run -A npm:rstack@0.8.4 test"
+    "test": "deno run -A npm:rstack@0.8.4 test",
+    "publish:dry": "deno publish --dry-run --allow-dirty"
   },
-  "nodeModulesDir": "auto",
+  "nodeModulesDir": "manual",
   "compilerOptions": {
     "lib": ["ESNext", "DOM"]
   }

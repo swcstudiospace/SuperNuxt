@@ -43,18 +43,24 @@ describe("release pin", () => {
       ),
     );
     const jsr = JSON.parse(
-      readFileSync(new URL("../jsr.json", import.meta.url), "utf8"),
+      readFileSync(
+        new URL("../packages/core/deno.json", import.meta.url),
+        "utf8",
+      ),
     ) as {
       version: string;
     };
     const createJsr = JSON.parse(
       readFileSync(
-        new URL("../packages/create-supernuxt/jsr.json", import.meta.url),
+        new URL("../packages/create-supernuxt/deno.json", import.meta.url),
         "utf8",
       ),
     ) as { version: string };
     const deno = JSON.parse(
-      readFileSync(new URL("../deno.json", import.meta.url), "utf8"),
+      readFileSync(
+        new URL("../packages/core/package.json", import.meta.url),
+        "utf8",
+      ),
     ) as {
       version: string;
     };

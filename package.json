@@ -33,12 +33,11 @@
     "public/favicon.svg",
     "public/apple-touch-icon.png",
     "nuxt.config.ts",
-    "deno.json",
-    "jsr.json",
     "README.md",
     "config",
     "packages/create-supernuxt/index.mjs",
-    "packages/create-supernuxt/mark.svg"
+    "packages/create-supernuxt/mark.svg",
+    "packages/create-supernuxt/index.d.mts"
   ],
   "exports": {
     ".": "./nuxt.config.ts"
@@ -61,7 +60,8 @@
     "doctor": "RSDOCTOR=true rs build",
     "create": "node packages/create-supernuxt/index.mjs",
     "build:packages": "npm run build -w @supernuxt/core && npm run build -w @supernuxt/nuxt",
-    "lint:pkg": "npm run build:packages && publint && publint packages/core && publint packages/nuxt && attw --pack packages/core --profile esm-only && attw --pack packages/nuxt --profile esm-only"
+    "lint:pkg": "npm run build:packages && publint && publint packages/core && publint packages/nuxt && attw --pack packages/core --profile esm-only && attw --pack packages/nuxt --profile esm-only",
+    "publish:dry": "npx -y jsr publish --dry-run --allow-dirty"
   },
   "dependencies": {
     "@nuxt/ui": "^4.11.3",

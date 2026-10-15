@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-self-types="./index.d.mts"
 import { readFileSync } from "node:fs";
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "node:path";
