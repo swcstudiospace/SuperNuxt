@@ -1,7 +1,7 @@
 # ROADMAP — milestone v0.3 "SOTA / enterprise-ready" (advisory; not executed)
 | # | Phase | Priority | Key packages |
 |---|---|---|---|
-| 1 | Packaging & release foundation | MUST | @nuxt/module-builder, tsdown/rs lib (core), publint, @arethetypeswrong/cli, @changesets/cli, jsr/deno publish --dry-run, npm provenance |
+| 1 ✅ | Packaging & release foundation (done 2026-10-15) | MUST | @nuxt/module-builder, tsdown/rs lib (core), publint, @arethetypeswrong/cli, @changesets/cli, jsr/deno publish --dry-run, npm provenance |
 | 2 | Quality gates: types, lint, tests | MUST | vue-tsc / `nuxt typecheck`, @nuxt/eslint (+ oxlint opt), @nuxt/test-utils + Vitest, Playwright, @axe-core/playwright |
 | 3 | Security baseline | MUST | nuxt-security (headers, CSP nonce, rate limit, request size, CSRF), auth on /api/chat & server-fn, zod-validated bodies |
 | 4 | Marketing-site stack | MUST | @nuxt/content v3, @nuxtjs/seo v6 (sitemap/robots/schema-org/og-image/link-checker), @nuxt/image, @nuxt/fonts (drop Google <link>), @nuxt/scripts |
