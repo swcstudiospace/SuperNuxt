@@ -10,8 +10,8 @@ metadata:
   library: supernuxt
   library_version: 0.2.0
 sources:
-  - @supernuxt/nuxt:src/module.ts
-  - @supernuxt/nuxt:src/runtime/query.ts
+  - "@supernuxt/nuxt:src/module.ts"
+  - "@supernuxt/nuxt:src/runtime/query.ts"
 requires: []
 ---
 
