@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // @ts-self-types="./index.d.mts"
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -198,9 +198,19 @@ async function main() {
   );
 }
 
-const invoked =
-  process.argv[1] &&
-  fileURLToPath(import.meta.url) === resolve(process.argv[1]);
+function isInvokedDirectly() {
+  if (!process.argv[1]) return false;
+  try {
+    // npm/npx/bun run bins through a .bin symlink, so compare real paths.
+    return (
+      realpathSync(fileURLToPath(import.meta.url)) ===
+      realpathSync(resolve(process.argv[1]))
+    );
+  } catch {
+    return false;
+  }
+}
+const invoked = isInvokedDirectly();
 if (invoked) {
   main().catch((error) => {
     process.stderr.write(
