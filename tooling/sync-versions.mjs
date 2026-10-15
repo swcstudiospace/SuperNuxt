@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-// Copies the root package version into every workspace manifest, every
-// deno.json that JSR publishes, internal dependency pins and the agent skill.
+// Changesets versions the workspace packages (fixed group). The version it
+// picked for @supernuxt/core is the release version: copy it to the root
+// `supernuxt` layer, every other manifest, the deno.json files JSR publishes,
+// internal dependency pins and the agent skill.
 import { readFileSync, writeFileSync } from "node:fs";
 
 const root = new URL("..", import.meta.url);
@@ -8,7 +10,7 @@ const read = (path) => readFileSync(new URL(path, root), "utf8");
 const writeJson = (path, value) =>
   writeFileSync(new URL(path, root), `${JSON.stringify(value, null, 2)}\n`);
 
-const version = JSON.parse(read("package.json")).version;
+const version = JSON.parse(read("packages/core/package.json")).version;
 const internal = ["@supernuxt/core", "@supernuxt/nuxt"];
 
 for (const path of [

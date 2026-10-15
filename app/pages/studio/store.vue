@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Store } from "@tanstack/store";
 import { useStore } from "@tanstack/vue-store";
-import { missions } from "#shared/missions";
+import { missions } from "#layers/supernuxt/shared/missions";
 
 const deck = new Store({
   callsign: "Harbor",

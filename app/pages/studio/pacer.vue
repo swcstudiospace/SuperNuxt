@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDebouncedValue, useRateLimiter } from "@tanstack/vue-pacer";
-import { missions } from "#shared/missions";
+import { missions } from "#layers/supernuxt/shared/missions";
 
 const draft = ref("");
 const [debounced] = useDebouncedValue(draft, { wait: 350 });

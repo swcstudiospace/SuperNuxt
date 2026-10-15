@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { rstackTools, tanstackLibraries } from "@supernuxt/core";
-import { hrefFor } from "#shared/nav";
+import { hrefFor } from "#layers/supernuxt/shared/nav";
 
 function cardHref(id: string) {
   const href = hrefFor(id);

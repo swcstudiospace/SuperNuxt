@@ -5,7 +5,7 @@ import {
   missionStatuses,
   type Mission,
   type MissionStatus,
-} from "#shared/missions";
+} from "#layers/supernuxt/shared/missions";
 import { isDraftId } from "@supernuxt/core";
 
 const status = ref<"all" | MissionStatus>("all");
