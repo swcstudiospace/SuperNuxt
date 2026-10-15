@@ -24,6 +24,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Record the base commit
+        id: base
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -71,6 +75,10 @@ jobs:
           git checkout -- .
           git clean -fd .changeset
           git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "${{ steps.base.outputs.sha }}" ]; then
+            echo "origin/main moved after this job read ${{ steps.base.outputs.sha }}. Not opening a version pull request."
+            exit 1
+          fi
           if git fetch origin changeset-release/main; then
             git checkout -B changeset-release/main origin/changeset-release/main
             git merge origin/main --no-edit
