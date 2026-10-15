@@ -33,7 +33,7 @@ deno run -A jsr:@supernuxt/create my-app
 
 ## Run this repository
 
-Node.js 22.21 or newer.
+Node.js 22.22.3+ or 24.15+.
 
 ```bash
 npm install

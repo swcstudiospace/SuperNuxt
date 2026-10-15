@@ -37,7 +37,7 @@ const virtualizer = useVirtualizer(
       >
         <div
           v-for="item in virtualizer.getVirtualItems()"
-          :key="item.key"
+          :key="String(item.key)"
           class="virtual-row"
           :style="{
             position: 'absolute',

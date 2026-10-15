@@ -5,7 +5,7 @@ const pads = ["North", "South", "East", "West"];
 const index = ref(0);
 
 useHotkey(
-  "j",
+  "J",
   () => {
     index.value = Math.min(pads.length - 1, index.value + 1);
   },
@@ -13,14 +13,14 @@ useHotkey(
 );
 
 useHotkey(
-  "k",
+  "K",
   () => {
     index.value = Math.max(0, index.value - 1);
   },
   { ignoreInputs: true },
 );
 
-const registrations = useHotkeyRegistrations();
+const { hotkeys: registered } = useHotkeyRegistrations();
 </script>
 
 <template>
@@ -45,12 +45,10 @@ const registrations = useHotkeyRegistrations();
     </ol>
     <h2>Registered</h2>
     <ul>
-      <li v-for="item in registrations.hotkeys" :key="item.id">
+      <li v-for="item in registered" :key="item.id">
         <code>{{ item.hotkey }}</code> · fired {{ item.triggerCount }}
       </li>
     </ul>
-    <p v-if="!registrations.hotkeys.length" class="meta">
-      No hotkeys are registered.
-    </p>
+    <p v-if="!registered.length" class="meta">No hotkeys are registered.</p>
   </div>
 </template>
