@@ -19,7 +19,7 @@ Usage
   pnpm create supernuxt [dir]
   bunx create-supernuxt [dir]
   npx create-supernuxt@latest [dir]
-  npx supernuxt [dir]
+  npx --package=@swcstudio/supernuxt supernuxt [dir]
   deno run -A jsr:@swcstudiospace/create-supernuxt [dir]
 
 Options

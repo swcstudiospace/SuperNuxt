@@ -16,11 +16,11 @@ npm create supernuxt@latest my-app
 pnpm create supernuxt my-app
 bunx create-supernuxt my-app
 npx create-supernuxt@latest my-app
-npx supernuxt my-app
+npx --package=@swcstudio/supernuxt supernuxt my-app
 deno run -A jsr:@swcstudiospace/create-supernuxt my-app
 ```
 
-`npm create supernuxt` and `pnpm create supernuxt` both install the npm package named `create-supernuxt`. `npx create-supernuxt` is that same package. `npx supernuxt` runs the `supernuxt` binary, which is the same script shipped inside the framework package. `bun create` does not run this scaffolder. Use `bunx`.
+`npm create supernuxt` and `pnpm create supernuxt` both install the npm package named `create-supernuxt`. `npx create-supernuxt` is that same package. `npx --package=@swcstudio/supernuxt supernuxt` runs the `supernuxt` binary, which is the same script shipped inside the framework package. `bun create` does not run this scaffolder. Use `bunx`.
 
 Deno can run the npm package before the JSR publish:
 
@@ -75,12 +75,12 @@ You publish two npm packages and two JSR packages. They share one version. The r
 
 | You publish                 | Registry name                          | Command it unlocks                                                                               |
 | --------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| This repository             | npm `supernuxt`                        | `npx supernuxt my-app`, and the dependency the scaffolder writes                                 |
+| This repository             | npm `@swcstudio/supernuxt`             | `npx --package=@swcstudio/supernuxt supernuxt my-app`, and the dependency the scaffolder writes  |
 | `packages/create-supernuxt` | npm `create-supernuxt`                 | `npm create supernuxt`, `pnpm create supernuxt`, `npx create-supernuxt`, `bunx create-supernuxt` |
 | `packages/core`             | JSR `@swcstudiospace/supernuxt-core`   | `jsr:@swcstudiospace/supernuxt-core` library import. The Nuxt app still installs from npm        |
 | `packages/create-supernuxt` | JSR `@swcstudiospace/create-supernuxt` | `deno run -A jsr:@swcstudiospace/create-supernuxt my-app`                                        |
 
-`npm create <name>` always looks up `create-<name>`. The bin inside `create-supernuxt` must stay `create-supernuxt`. That is the command `npm create`, `pnpm create`, `bunx`, and `npx create-supernuxt` run. The `supernuxt` package ships two bins, `supernuxt` and `create-supernuxt`, and both point at `packages/create-supernuxt/index.mjs`. `npx supernuxt` runs the `supernuxt` bin.
+`npm create <name>` always looks up `create-<name>`. The bin inside `create-supernuxt` must stay `create-supernuxt`. That is the command `npm create`, `pnpm create`, `bunx`, and `npx create-supernuxt` run. The `@swcstudio/supernuxt` package ships two bins, `supernuxt` and `create-supernuxt`, and both point at `packages/create-supernuxt/index.mjs`. Because the package is scoped, plain `npx supernuxt` would resolve the unscoped `supernuxt` package. Use `npx --package=@swcstudio/supernuxt supernuxt`.
 
 Versions move together. Add a changeset with `npx changeset`, then `npm run version`: Changesets bumps `@swcstudio/supernuxt-core`, `@swcstudio/supernuxt-nuxt` and `create-supernuxt`, and `tooling/sync-versions.mjs` copies that version to the root `supernuxt` package, both `deno.json` files and `library_version` in `skills/use-supernuxt/SKILL.md`. Update `supernuxt.nuxt` in `packages/create-supernuxt/package.json` when the Nuxt pin changes. Publishing is the manual `Release` workflow.
 
@@ -104,7 +104,7 @@ Confirm from a clean directory:
 
 ```bash
 npm create supernuxt@latest harbor
-npx supernuxt harbor-two
+npx --package=@swcstudio/supernuxt supernuxt harbor-two
 deno run -A jsr:@swcstudiospace/create-supernuxt harbor-three
 ```
 

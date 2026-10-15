@@ -16,7 +16,7 @@ npm create supernuxt@latest my-app
 pnpm create supernuxt my-app
 bunx create-supernuxt my-app
 npx create-supernuxt@latest my-app
-npx supernuxt my-app
+npx --package=@swcstudio/supernuxt supernuxt my-app
 deno run -A jsr:@swcstudiospace/create-supernuxt my-app
 ```
 

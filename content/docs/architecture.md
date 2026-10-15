@@ -5,7 +5,7 @@ section: Architecture
 order: 1
 ---
 
-SuperNuxt is a Nuxt 4.6 layer. The package entry `.` is `nuxt.config.ts`, which calls `defineLayerConfig` in `config/layer.ts`. A consumer that extends the layer gets the module, the CSS, the landing page, this documentation, and the studio. The module alone is the separate package `@swcstudio/supernuxt-nuxt` (`npm i @swcstudio/supernuxt-nuxt`, then `modules: ["@swcstudio/supernuxt-nuxt"]`); framework-agnostic code is `@swcstudio/supernuxt-core` on npm and JSR.
+SuperNuxt is a Nuxt 4.6 layer. The package entry `.` is `nuxt.config.ts`, which calls `defineLayerConfig` in `config/layer.ts`. A consumer that extends the layer gets the module, the CSS, the landing page, this documentation, and the studio. The module alone is the separate package `@swcstudio/supernuxt-nuxt` (`npm i @swcstudio/supernuxt-nuxt`, then `modules: ["@swcstudio/supernuxt-nuxt"]`); framework-agnostic code is `@swcstudio/supernuxt-core` on npm and `@swcstudiospace/supernuxt-core` on JSR.
 
 Nuxt serves the app with Vite. Rstack builds the pieces around the repository: tests, lint, the core library, and the static console. User documentation is this Nuxt app. Pages are markdown in `content/docs`. There is no second docs site.
 
