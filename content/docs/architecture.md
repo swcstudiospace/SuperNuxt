@@ -5,7 +5,7 @@ section: Architecture
 order: 1
 ---
 
-SuperNuxt is a Nuxt 4.6 layer. The package entry `.` is `nuxt.config.ts`, which calls `defineLayerConfig` in `src/domain/layer.ts`. A consumer that extends the layer gets the module, the CSS, the landing page, this documentation, and the studio. The export `./nuxt` is the module alone, at `modules/supernuxt/index.ts`.
+SuperNuxt is a Nuxt 4.6 layer. The package entry `.` is `nuxt.config.ts`, which calls `defineLayerConfig` in `config/layer.ts`. A consumer that extends the layer gets the module, the CSS, the landing page, this documentation, and the studio. The module alone is the separate package `@supernuxt/nuxt` (`npm i @supernuxt/nuxt`, then `modules: ["@supernuxt/nuxt"]`); framework-agnostic code is `@supernuxt/core` on npm and JSR.
 
 Nuxt serves the app with Vite. Rstack builds the pieces around the repository: tests, lint, the core library, and the static console. User documentation is this Nuxt app. Pages are markdown in `content/docs`. There is no second docs site.
 
@@ -31,11 +31,11 @@ export default defineNuxtConfig({
 });
 ```
 
-Inside this repository the module is local: `modules: ["./modules/supernuxt"]`. The module's `configKey` is `supernuxt`, and it declares compatibility with Nuxt `>=4.0.0`. Parsed options are written to `runtimeConfig.public.supernuxt`. `useSuperNuxt()` reads them back.
+Inside this repository the module is the workspace package `packages/nuxt`, built with `@nuxt/module-builder` and registered as `@supernuxt/nuxt`. The module's `configKey` is `supernuxt`, and it declares compatibility with Nuxt `>=4.0.0`. Parsed options are written to `runtimeConfig.public.supernuxt`. `useSuperNuxt()` reads them back.
 
 The module auto-imports `useQuery`, `useMutation`, `useQueryClient`, `useLiveQuery`, `useStore`, `useForm`, `useTable`, `useVirtualizer`, `useHotkey`, `useHotkeys`, `useChat`, `useServerFn`, `useMissionBoard`, and `useSuperNuxt`. A page does not import them.
 
-The Query plugin in `modules/supernuxt/runtime/query.ts` builds one `QueryClient` per request. `staleTime` comes from the module options, and queries retry once. On the server it dehydrates that client during `app:rendered`. On the client it hydrates only when that state is present. Passing an empty state into `hydrate()` is avoided on purpose.
+The Query plugin in `packages/nuxt/src/runtime/query.ts` builds one `QueryClient` per request. `staleTime` comes from the module options, and queries retry once. On the server it dehydrates that client during `app:rendered`. On the client it hydrates only when that state is present. Passing an empty state into `hydrate()` is avoided on purpose.
 
 ## Ledger
 
@@ -45,7 +45,7 @@ Mission rows live in one process-local ledger. `shared/missions.ts` is the seed.
 
 The DB bench on `/studio/db` keeps inserts in a local-only collection. Ids that start with `local-` (`isDraftId`) stay on the client and are not patched through this ledger.
 
-Server functions read the ledger. They do not write it. `dispatchServerFn` in `src/domain/contracts.ts` takes a snapshot from `ledger.list()`.
+Server functions read the ledger. They do not write it. `dispatchServerFn` in `packages/core/src/contracts.ts` takes a snapshot from `ledger.list()`.
 
 ## Server functions
 
@@ -98,7 +98,7 @@ When `queryDevtools` is true, studio routes mount the TanStack Devtools dock wit
 | `npm run lint`         | Rslint     | Lints the repository                          |
 | `npm run format`       | Rstack CLI | Formats with the shared printer               |
 | `npm run check`        | Rstack CLI | Lint plus format check                        |
-| `npm run lib`          | Rslib      | Bundles `src/index.ts` as ESM                 |
+| `npm run lib`          | Rslib      | Bundles `packages/core/src/index.ts` as ESM   |
 | `npm run rstack:build` | Rsbuild    | Writes the console to `public/rstack-console` |
 | `npm run rstack:dev`   | Rsbuild    | Serves that console on port 47831             |
 | `npm run doctor`       | Rsdoctor   | A build report for the Rsbuild console        |

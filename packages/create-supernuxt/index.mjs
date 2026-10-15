@@ -172,7 +172,7 @@ export async function scaffold(options) {
       .toLowerCase()
       .replace(/[^a-z0-9-]+/g, "-")
       .replace(/^-|-$/g, "") || "supernuxt-app";
-  const written = files(options.framework, name);
+  const written = files(options.framework || `^${version}`, name);
   written["public/favicon.svg"] = mark;
 
   await mkdir(target, { recursive: true });

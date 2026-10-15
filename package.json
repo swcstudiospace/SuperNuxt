@@ -35,6 +35,7 @@
     "nuxt.config.ts",
     "README.md",
     "config",
+    "packages/create-supernuxt/package.json",
     "packages/create-supernuxt/index.mjs",
     "packages/create-supernuxt/mark.svg",
     "packages/create-supernuxt/index.d.mts"
@@ -49,7 +50,6 @@
     "dev": "nuxt dev --port 47821 --host 127.0.0.1",
     "build": "nuxt build",
     "preview": "nuxt preview --port 47821 --host 127.0.0.1",
-    "postinstall": "npm run build:packages && nuxt prepare",
     "test": "rs test",
     "lint": "rs lint",
     "format": "rs fmt",
@@ -65,7 +65,8 @@
     "typecheck": "nuxt typecheck",
     "changeset": "changeset",
     "version": "changeset version && node tooling/sync-versions.mjs && npm install --package-lock-only",
-    "pack:dry": "npm pack --dry-run && npm pack --dry-run -w @supernuxt/core -w @supernuxt/nuxt -w create-supernuxt"
+    "pack:dry": "npm pack --dry-run && npm pack --dry-run -w @supernuxt/core -w @supernuxt/nuxt -w create-supernuxt",
+    "prepare": "npm run build:packages && nuxt prepare"
   },
   "dependencies": {
     "@nuxt/ui": "^4.11.3",
