@@ -16,7 +16,10 @@ const visible = computed(() =>
 );
 
 function setShift(shift: "dawn" | "night") {
-  void navigate({ search: { shift } });
+  // This router island is not Nuxt's route tree, so search is untyped here.
+  void navigate({
+    search: () => ({ shift }),
+  } as never);
 }
 </script>
 

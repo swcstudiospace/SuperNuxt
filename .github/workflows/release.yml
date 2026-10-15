@@ -1,0 +1,71 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: version-pr
+  cancel-in-progress: false
+
+jobs:
+  version:
+    name: Version and changelog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Detect unreleased changesets
+        id: changesets
+        run: |
+          count="$(find .changeset -type f -name '*.md' ! -name 'README.md' | wc -l | tr -d ' ')"
+          echo "count=${count}" >> "$GITHUB_OUTPUT"
+          echo "Unreleased changesets: ${count}"
+
+      - name: Write the version and changelog
+        if: steps.changesets.outputs.count != '0'
+        run: npx changeset version
+
+      - name: Copy the version to the other release pins
+        if: steps.changesets.outputs.count != '0'
+        run: node tooling/sync-release-version.mjs
+
+      - name: Open a version pull request
+        if: steps.changesets.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            echo "Version command made no file changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B changeset-release/main
+          git add package.json package-lock.json CHANGELOG.md jsr.json deno.json .changeset packages/create-supernuxt/package.json packages/create-supernuxt/jsr.json skills/use-supernuxt/SKILL.md
+          git commit -m "chore: version packages"
+          git push origin changeset-release/main
+          existing="$(gh pr list --head changeset-release/main --json number --jq 'length')"
+          if [ "$existing" != "0" ]; then
+            echo "Version pull request already exists."
+          else
+            gh pr create --base main --head changeset-release/main --title "chore: version packages" --body "Version bump and changelog only. This workflow does not publish to npm or JSR."
+          fi

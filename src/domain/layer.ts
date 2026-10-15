@@ -1,11 +1,12 @@
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export interface LayerFragment {
   readonly $meta: { readonly name: "supernuxt" };
-  readonly modules: readonly [string, string];
-  readonly css: readonly [string, string];
+  modules: [string, string];
+  css: [string, string];
   readonly [key: string]: unknown;
 }
 
@@ -41,7 +42,7 @@ export function defineLayerConfig(configFileUrl: string): LayerFragment {
     compatibilityDate: "2026-10-14",
     telemetry: false,
     modules: ["@nuxt/ui", moduleEntry],
-    css,
+    css: [css[0], css[1]],
     colorMode: {
       preference: "light",
       fallback: "light",
@@ -63,14 +64,14 @@ export function defineLayerConfig(configFileUrl: string): LayerFragment {
           {
             name: "description",
             content:
-              "SuperNuxt is a Nuxt 4 framework with TanStack Query, Table, Form, DB, AI, and the rest of the TanStack catalog, built with the Rstack toolchain.",
+              "SuperNuxt is a Nuxt 4 framework with TanStack Query, Table, Form, DB, AI, and the rest of the TanStack catalog. Nuxt builds the app. Rstack builds the side console.",
           },
           { name: "viewport", content: "width=device-width, initial-scale=1" },
           { property: "og:title", content: "SuperNuxt" },
           {
             property: "og:description",
             content:
-              "SuperNuxt is a Nuxt 4 framework with TanStack, Rstack, and a built-in documentation site.",
+              "SuperNuxt is a Nuxt 4 framework with TanStack and a documentation site rendered by the Nuxt app. Rstack builds the side console.",
           },
           { property: "og:image", content: "/brand/banner.jpg" },
         ],
@@ -122,6 +123,26 @@ export function defineLayerConfig(configFileUrl: string): LayerFragment {
     nitro: {
       externals: {
         inline: ["zod"],
+      },
+      rollupConfig: {
+        plugins: [
+          {
+            name: "supernuxt-shared-import",
+            resolveId(source: string, importer: string | undefined) {
+              if (!source.startsWith(".") || !source.includes("/shared/")) {
+                return null;
+              }
+              const clean = source.split("?")[0] ?? source;
+              const file = clean.slice(clean.lastIndexOf("/shared/") + 8);
+              const target = join(root, "shared", file);
+              if (!existsSync(target)) return null;
+              if (importer && existsSync(resolve(dirname(importer), clean))) {
+                return null;
+              }
+              return target;
+            },
+          },
+        ],
       },
     },
     typescript: {

@@ -23,7 +23,7 @@ export const studioPages: readonly StudioPage[] = [
   { href: "/studio/query", label: "Query", group: "Data", ids: ["query"] },
   { href: "/studio/db", label: "DB", group: "Data", ids: ["db"] },
   { href: "/studio/store", label: "Store", group: "Data", ids: ["store"] },
-  { href: "/studio/start", label: "Start", group: "Data", ids: ["start"] },
+  { href: "/studio/start", label: "Functions", group: "Data", ids: ["start"] },
   { href: "/studio/ai", label: "AI", group: "Data", ids: ["ai"] },
   { href: "/studio/table", label: "Table", group: "Interface", ids: ["table"] },
   {

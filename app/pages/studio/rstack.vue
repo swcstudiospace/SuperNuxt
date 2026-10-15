@@ -32,7 +32,7 @@ const tooling = computed(
   <PageIntro
     kicker="Rstack"
     title="Toolchain"
-    lede="Nuxt still serves this app with Vite. Rstack builds the core library, the console in the frame below, the tests, and the lint pass."
+    lede="Nuxt builds and serves this app with Vite. Rstack does not build the Nuxt app. It builds the core library, the console in the frame below, the tests, and the lint pass."
   />
 
   <p v-if="pending">Reading installed packages…</p>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { installCommands } from "../../shared/nav";
+import { installCommands } from "#shared/nav";
 import { rstackTools, tanstackLibraries } from "../../src/index";
 
 const copied = ref("");
@@ -63,16 +63,16 @@ const tabs = installCommands.map((item) => ({
         <p class="kicker">Libraries</p>
         <h2>{{ tanstackLibraries.length }} TanStack</h2>
         <p>
-          Vue adapters where they exist. Start's server-function idea runs on
-          Nitro.
+          Vue adapters where they exist. Server functions run as Zod-checked
+          Nitro handlers.
         </p>
       </article>
       <article class="card">
         <p class="kicker">Toolchain</p>
         <h2>{{ rstackTools.length }} Rstack</h2>
         <p>
-          Rspack, Rsbuild, Rslib, Rspress, Rsdoctor, Rstest, Rslint, and the
-          Rstack CLI.
+          Rsbuild writes the side console. Rslib bundles the core library.
+          Rstest and Rslint test and lint. Nuxt builds this app.
         </p>
       </article>
     </div>

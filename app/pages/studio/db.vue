@@ -5,7 +5,7 @@ import {
   missionStatuses,
   type Mission,
   type MissionStatus,
-} from "../../../shared/missions";
+} from "#shared/missions";
 import { isDraftId } from "../../../src/domain/ledger";
 
 const status = ref<"all" | MissionStatus>("all");

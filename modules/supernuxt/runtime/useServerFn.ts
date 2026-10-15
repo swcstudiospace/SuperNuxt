@@ -11,13 +11,16 @@ export function useServerFn<N extends ServerFnName>(name: N) {
   const requestFetch = useRequestFetch();
 
   async function call(input: ServerInput<N>): Promise<ServerOutput<N>> {
-    return await requestFetch<ServerOutput<N>>(
-      `/api/__supernuxt/fn/${fnName}`,
-      {
-        method: "POST",
-        body: input,
-      },
-    );
+    // The dynamic route is not part of Nuxt's typed fetch map, which only
+    // offers GET for an unknown path. The call itself stays a POST.
+    const post = requestFetch as (
+      url: string,
+      options: { method: "POST"; body: ServerInput<N> },
+    ) => Promise<ServerOutput<N>>;
+    return await post(`/api/__supernuxt/fn/${fnName}`, {
+      method: "POST",
+      body: input,
+    });
   }
 
   return { name: fnName as N, call };

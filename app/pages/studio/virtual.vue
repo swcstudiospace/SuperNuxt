@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useVirtualizer } from "@tanstack/vue-virtual";
-import { telemetryLine } from "../../../shared/missions";
+import { telemetryLine } from "#shared/missions";
 
 const count = 5000;
 const parentRef = ref<HTMLElement | null>(null);
@@ -37,7 +37,7 @@ const virtualizer = useVirtualizer(
       >
         <div
           v-for="item in virtualizer.getVirtualItems()"
-          :key="item.key"
+          :key="String(item.key)"
           class="virtual-row"
           :style="{
             position: 'absolute',

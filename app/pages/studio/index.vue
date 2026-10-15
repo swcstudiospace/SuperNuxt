@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { rstackTools, tanstackLibraries } from "../../../src/index";
-import { hrefFor } from "../../../shared/nav";
+import { hrefFor } from "#shared/nav";
 
 function cardHref(id: string) {
   const href = hrefFor(id);
@@ -29,16 +29,16 @@ const linked = tanstackLibraries;
       <p class="kicker">Libraries</p>
       <h2>{{ tanstackLibraries.length }} TanStack</h2>
       <p>
-        Vue adapters where they exist. Start is bridged onto Nitro because it
-        targets React and Solid.
+        Vue adapters where they exist. Server functions run as Zod-checked Nitro
+        handlers.
       </p>
     </article>
     <article class="card">
       <p class="kicker">Toolchain</p>
       <h2>{{ rstackTools.length }} Rstack</h2>
       <p>
-        Rspack, Rsbuild, Rslib, Rspress, Rsdoctor, Rstest, Rslint, and the
-        Rstack CLI.
+        Rsbuild writes the side console. Rslib bundles the core library. Rstest
+        and Rslint test and lint. Nuxt builds this app.
       </p>
     </article>
   </section>

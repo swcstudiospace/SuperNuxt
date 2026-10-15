@@ -58,6 +58,7 @@
     "lint": "rs lint",
     "format": "rs fmt",
     "check": "rs check",
+    "typecheck": "nuxt typecheck",
     "lib": "rs lib",
     "rstack:dev": "rs dev --port 47831",
     "rstack:build": "rs build",
@@ -86,6 +87,7 @@
     "@tanstack/vue-store": "^0.11.2",
     "@tanstack/vue-table": "^9.3.1",
     "@tanstack/vue-virtual": "^3.13.45",
+    "dayjs": "^1.11.23",
     "nuxt": "4.6.1",
     "tailwindcss": "^4.3.3",
     "vue": "^3.5.22",
@@ -93,12 +95,14 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.1",
     "@rsdoctor/core": "^1.6.5",
     "@tanstack/cli": "^0.71.1",
     "@tanstack/config": "^0.22.2",
     "@tanstack/intent": "^0.5.5",
     "rstack": "^0.8.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.3.13"
   },
   "engines": {
     "node": ">=22.21.0"

@@ -1,0 +1,8 @@
+{
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "dev": "deno run -A npm:nuxt@4.6.1 dev",
+    "build": "deno run -A npm:nuxt@4.6.1 build",
+    "preview": "deno run -A npm:nuxt@4.6.1 preview"
+  }
+}

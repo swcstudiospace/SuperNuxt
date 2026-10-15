@@ -12,12 +12,12 @@ export interface StackEntry {
 export const tanstackLibraries = [
   {
     id: "start",
-    name: "TanStack Start",
+    name: "Nitro server functions",
     kind: "bridge",
     group: "Framework",
     packageName: null,
     summary:
-      "Start targets React and Solid. SuperNuxt maps its server-function idea onto Nitro handlers.",
+      "Named client functions call Zod-checked Nitro handlers. SuperNuxt does not mount a separate React or Solid server framework.",
   },
   {
     id: "router",
@@ -173,7 +173,7 @@ export const rstackTools = [
     kind: "tooling",
     group: "Rstack",
     packageName: "@rspack/core",
-    summary: "Rust bundler underneath Rsbuild, Rslib, Rstest, and Rspress.",
+    summary: "Rust bundler underneath Rsbuild, Rslib, and Rstest.",
   },
   {
     id: "rsbuild",
@@ -198,7 +198,7 @@ export const rstackTools = [
     group: "Rstack",
     packageName: "@rspress/core",
     summary:
-      "Docs engine that ships inside Rstack. SuperNuxt docs are the Nuxt site at /docs.",
+      "Not used. Documentation is the Nuxt app at /docs, rendered from content/docs.",
   },
   {
     id: "rsdoctor",
@@ -230,7 +230,8 @@ export const rstackTools = [
     kind: "tooling",
     group: "Rstack",
     packageName: "rstack",
-    summary: "One CLI for build, test, lint, format, lib, and docs.",
+    summary:
+      "One CLI for the side console, tests, lint, format, and the core library. It does not build the Nuxt app.",
   },
 ] as const satisfies readonly StackEntry[];
 
