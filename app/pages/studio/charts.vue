@@ -3,9 +3,13 @@ import { barX, defineChart } from "@tanstack/charts";
 import { scaleBand } from "@tanstack/charts/scales/band";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
 import { Chart } from "@tanstack/charts/vue";
-import { missions } from "../../../shared/missions";
+import { missions } from "#layers/supernuxt/shared/missions";
 
 const focused = ref("");
+
+function onFocusChange(point: { y: unknown } | null | undefined): void {
+  focused.value = point ? String(point.y) : "";
+}
 
 const definition = computed(() =>
   defineChart({
@@ -40,7 +44,7 @@ const definition = computed(() =>
       aria-label="Delta-v by mission code"
       :aspect-ratio="16 / 9"
       :initial-width="720"
-      @focus-change="focused = $event ? String($event.y) : ''"
+      :on-focus-change="onFocusChange"
     />
     <p class="meta">
       {{

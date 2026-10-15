@@ -1,0 +1,61 @@
+# Staged release pipeline. It never runs on its own: the only trigger is a
+# manual dispatch, and the job is skipped unless the repository variable
+# SUPERNUXT_RELEASE_ENABLED is set to "true" by a maintainer.
+# Every step is safe to re-run after a partial failure: versions that are
+# already on npm are skipped.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type "publish" to publish the current versions to npm and JSR
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: ${{ vars.SUPERNUXT_RELEASE_ENABLED == 'true' && inputs.confirm == 'publish' }}
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: read
+      id-token: write # npm provenance and JSR OIDC
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
+        with:
+          deno-version: v2.x
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint:pkg
+
+      - name: Publish workspace packages to npm (skips published versions)
+        run: npx changeset publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"
+
+      - name: Publish the supernuxt layer to npm (skips a published version)
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if npm view "supernuxt@${version}" version >/dev/null 2>&1; then
+            echo "supernuxt@${version} is already on npm"
+          else
+            npm publish --provenance --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to JSR (OIDC)
+        run: deno publish

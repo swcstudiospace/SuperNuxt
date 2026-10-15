@@ -5,8 +5,8 @@ import {
   missionStatuses,
   type Mission,
   type MissionStatus,
-} from "../../../shared/missions";
-import { isDraftId } from "../../../src/domain/ledger";
+} from "#layers/supernuxt/shared/missions";
+import { isDraftId } from "@supernuxt/core";
 
 const status = ref<"all" | MissionStatus>("all");
 const { data: remote } = await useFetch<Mission[]>("/api/missions");

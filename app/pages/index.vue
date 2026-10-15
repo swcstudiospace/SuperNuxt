@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { installCommands } from "../../shared/nav";
-import { rstackTools, tanstackLibraries } from "../../src/index";
+import { installCommands } from "#layers/supernuxt/shared/nav";
+import { rstackTools, tanstackLibraries } from "@supernuxt/core";
 
 const copied = ref("");
 

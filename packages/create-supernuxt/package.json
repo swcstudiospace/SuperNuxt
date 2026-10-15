@@ -19,15 +19,17 @@
   "files": [
     "index.mjs",
     "mark.svg",
-    "README.md"
+    "README.md",
+    "index.d.mts"
   ],
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=22.21.0"
+    "node": "^22.22.3 || >=24.15.0"
   },
   "supernuxt": {
     "nuxt": "4.6.1"
-  }
+  },
+  "types": "./index.d.mts"
 }

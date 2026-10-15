@@ -7,6 +7,7 @@ import {
   tableFeatures,
   useTable,
 } from "@tanstack/vue-table";
+import type { Mission } from "@supernuxt/core";
 const board = useMissionBoard();
 
 if (import.meta.server) await board.prefetch();
@@ -27,7 +28,7 @@ const columns = [
 ];
 
 const rows = computed(() => [...board.missions.value]);
-const table = useTable({
+const table = useTable<typeof features, Mission>({
   features,
   columns,
   data: rows,

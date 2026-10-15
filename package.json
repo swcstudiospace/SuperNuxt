@@ -25,26 +25,23 @@
   },
   "files": [
     "app",
-    "modules",
     "server",
     "shared",
-    "src",
     "content",
-    "packages/create-supernuxt",
     "public/brand/mark.svg",
     "public/brand/banner.jpg",
     "public/favicon.svg",
     "public/apple-touch-icon.png",
     "nuxt.config.ts",
-    "deno.json",
-    "jsr.json",
-    "README.md"
+    "README.md",
+    "config",
+    "packages/create-supernuxt/package.json",
+    "packages/create-supernuxt/index.mjs",
+    "packages/create-supernuxt/mark.svg",
+    "packages/create-supernuxt/index.d.mts"
   ],
   "exports": {
-    ".": "./nuxt.config.ts",
-    "./nuxt": "./modules/supernuxt/index.ts",
-    "./core": "./src/index.ts",
-    "./cli": "./packages/create-supernuxt/index.mjs"
+    ".": "./nuxt.config.ts"
   },
   "publishConfig": {
     "access": "public"
@@ -53,7 +50,6 @@
     "dev": "nuxt dev --port 47821 --host 127.0.0.1",
     "build": "nuxt build",
     "preview": "nuxt preview --port 47821 --host 127.0.0.1",
-    "postinstall": "nuxt prepare",
     "test": "rs test",
     "lint": "rs lint",
     "format": "rs fmt",
@@ -62,10 +58,20 @@
     "rstack:dev": "rs dev --port 47831",
     "rstack:build": "rs build",
     "doctor": "RSDOCTOR=true rs build",
-    "create": "node packages/create-supernuxt/index.mjs"
+    "create": "node packages/create-supernuxt/index.mjs",
+    "build:packages": "npm run build -w @supernuxt/core && npm run build -w @supernuxt/nuxt",
+    "lint:pkg": "npm run build:packages && publint && publint packages/core && publint packages/nuxt && attw --pack packages/core --profile esm-only && attw --pack packages/nuxt --profile esm-only",
+    "publish:dry": "npx -y jsr publish --dry-run --allow-dirty",
+    "typecheck": "nuxt typecheck",
+    "changeset": "changeset",
+    "version": "changeset version && node tooling/sync-versions.mjs && npm install --package-lock-only",
+    "pack:dry": "npm pack --dry-run && npm pack --dry-run -w @supernuxt/core -w @supernuxt/nuxt -w create-supernuxt",
+    "prepare": "npm run build:packages && nuxt prepare"
   },
   "dependencies": {
     "@nuxt/ui": "^4.11.3",
+    "@supernuxt/core": "0.2.0",
+    "@supernuxt/nuxt": "0.2.0",
     "@tanstack/ai": "^0.69.0",
     "@tanstack/ai-vue": "^0.26.4",
     "@tanstack/charts": "^1.1.0",
@@ -93,14 +99,20 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@changesets/cli": "^2.29.7",
     "@rsdoctor/core": "^1.6.5",
     "@tanstack/cli": "^0.71.1",
-    "@tanstack/config": "^0.22.2",
     "@tanstack/intent": "^0.5.5",
+    "publint": "^0.3.12",
     "rstack": "^0.8.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.1.1"
   },
   "engines": {
-    "node": ">=22.21.0"
-  }
+    "node": "^22.22.3 || >=24.15.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { missions } from "../../../shared/missions";
+import { missions } from "#layers/supernuxt/shared/missions";
 
 const briefingFn = useServerFn("briefing");
 const missionId = ref(missions[0]?.id ?? "");

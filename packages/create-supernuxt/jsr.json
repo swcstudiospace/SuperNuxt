@@ -1,9 +1,0 @@
-{
-  "name": "@supernuxt/create",
-  "version": "0.2.0",
-  "license": "MIT",
-  "exports": "./index.mjs",
-  "publish": {
-    "include": ["index.mjs", "mark.svg", "README.md", "jsr.json"]
-  }
-}

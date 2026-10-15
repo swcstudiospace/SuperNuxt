@@ -1,4 +1,4 @@
-import { parseStatusChange } from "../../../src/domain/ledger";
+import { parseStatusChange } from "@supernuxt/core";
 import { ledger } from "../../ledger";
 
 export default defineEventHandler(async (event) => {

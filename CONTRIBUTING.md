@@ -4,7 +4,7 @@ SuperNuxt is a Nuxt 4 framework. Issues and pull requests are welcome at [github
 
 ## What you need
 
-- Node.js 22.21 or newer. The root `package.json` `engines` field is the pin.
+- Node.js 22.22.3+ or 24.15+. The root `package.json` `engines` field is the pin.
 - npm. The lockfile is `package-lock.json`.
 
 ```bash
@@ -21,7 +21,7 @@ npm run check
 
 User docs live only in `content/docs` and render in the Nuxt app at `/docs`. Do not add a `docs/` site, Rspress config, or a second documentation build.
 
-Each page is markdown with frontmatter: `title`, `description`, `section`, and `order`. `section` is one of `Architecture`, `Usage`, or `Information`. The parser is `src/domain/docs.ts`. The corpus test in `src/upgrades.test.ts` lists the expected slugs. The architecture page is served at `/docs`.
+Each page is markdown with frontmatter: `title`, `description`, `section`, and `order`. `section` is one of `Architecture`, `Usage`, or `Information`. The parser is `packages/core/src/docs.ts`. The corpus test in `test/upgrades.test.ts` lists the expected slugs. The architecture page is served at `/docs`.
 
 Keep the three sections to those concerns:
 
@@ -32,7 +32,7 @@ Keep the three sections to those concerns:
 ## Pull requests
 
 - Describe the behavior you changed and how you checked it (`npm test`, `npm run check`, and the route you loaded if the Nuxt app changed).
-- Keep `version` in the root `package.json`, `packages/create-supernuxt/package.json`, `jsr.json`, `packages/create-supernuxt/jsr.json`, `deno.json`, and `library_version` in `skills/use-supernuxt/SKILL.md` on the same semver. The create package field `supernuxt.nuxt` stays equal to `dependencies.nuxt`.
+- Versions are kept in lockstep by `npm run version` (Changesets + `tooling/sync-versions.mjs`): every `package.json`, both `deno.json` files under `packages/`, and `library_version` in `skills/use-supernuxt/SKILL.md`. The create package field `supernuxt.nuxt` stays equal to `dependencies.nuxt`.
 - Do not commit `node_modules`, `.nuxt`, `.output`, or generated Rstack output. Those paths are gitignored.
 
 ## Reporting problems

@@ -1,0 +1,86 @@
+{
+  "name": "@supernuxt/nuxt",
+  "version": "0.2.0",
+  "description": "Nuxt module for SuperNuxt: TanStack Query SSR plugin and typed auto-imports.",
+  "type": "module",
+  "homepage": "https://github.com/swcstudiospace/SuperNuxt",
+  "bugs": {
+    "url": "https://github.com/swcstudiospace/SuperNuxt/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swcstudiospace/SuperNuxt.git",
+    "directory": "packages/nuxt"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@nuxt/kit": "^4.2.0",
+    "@supernuxt/core": "0.2.0",
+    "ofetch": "^1.4.1"
+  },
+  "peerDependencies": {
+    "@tanstack/vue-query": "^5.104.2",
+    "@tanstack/vue-db": "^0.3.9",
+    "@tanstack/vue-store": "^0.11.2",
+    "@tanstack/vue-form": "^1.33.5",
+    "@tanstack/vue-table": "^9.3.1",
+    "@tanstack/vue-virtual": "^3.13.45",
+    "@tanstack/vue-hotkeys": "^0.13.0",
+    "@tanstack/ai-vue": "^0.26.4",
+    "nuxt": "4.6.1",
+    "vue": "^3.5.22"
+  },
+  "peerDependenciesMeta": {
+    "@tanstack/vue-db": {
+      "optional": true
+    },
+    "@tanstack/vue-store": {
+      "optional": true
+    },
+    "@tanstack/vue-form": {
+      "optional": true
+    },
+    "@tanstack/vue-table": {
+      "optional": true
+    },
+    "@tanstack/vue-virtual": {
+      "optional": true
+    },
+    "@tanstack/vue-hotkeys": {
+      "optional": true
+    },
+    "@tanstack/ai-vue": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^22.22.3 || >=24.15.0"
+  },
+  "main": "./dist/module.mjs",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/types.d.mts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "nuxt-module-build prepare && nuxt-module-build build",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "^1.0.2"
+  }
+}

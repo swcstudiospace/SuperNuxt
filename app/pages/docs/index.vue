@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { docPages, neighbors } from "../../../shared/docs";
+import { docPages, neighbors } from "#layers/supernuxt/shared/docs";
 
 const page = docPages[0];
 if (!page) {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { navGroups, studioNav } from "../../shared/nav";
-import { docPages, docSections } from "../../shared/docs";
+import { navGroups, studioNav } from "#layers/supernuxt/shared/nav";
+import { docPages, docSections } from "#layers/supernuxt/shared/docs";
 
 const route = useRoute();
 const helpOpen = ref(false);

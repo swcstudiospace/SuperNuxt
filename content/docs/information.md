@@ -49,14 +49,14 @@ The scaffolder also accepts `--dir`, `--help`, and `--yes`. `--yes` is accepted 
 
 ## From this repository
 
-Node.js 22.21 or newer.
+Node.js 22.22.3+ or 24.15+.
 
 ```bash
 npm install
 npm run dev
 ```
 
-The dev server listens on `127.0.0.1` port `47821`. `deno task dev` starts the same Nuxt app through Deno's npm compatibility. `deno.json` names this package `@supernuxt/core`, sets `nodeModulesDir` to `auto`, and also defines `deno task create` and `deno task test`.
+The dev server listens on `127.0.0.1` port `47821`. `deno task dev` starts the same Nuxt app through Deno's npm compatibility. The root `deno.json` is a Deno workspace over `packages/core` and `packages/create-supernuxt`, sets `nodeModulesDir` to `manual`, and also defines `deno task create`, `deno task test` and `deno task publish:dry`.
 
 Before either registry has the package:
 
@@ -77,12 +77,12 @@ You publish two npm packages and two JSR packages. They share one version. The r
 | --------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
 | This repository             | npm `supernuxt`         | `npx supernuxt my-app`, and the dependency the scaffolder writes                                 |
 | `packages/create-supernuxt` | npm `create-supernuxt`  | `npm create supernuxt`, `pnpm create supernuxt`, `npx create-supernuxt`, `bunx create-supernuxt` |
-| This repository             | JSR `@supernuxt/core`   | `jsr:@supernuxt/core` library import. The Nuxt app still installs from npm                       |
+| `packages/core`             | JSR `@supernuxt/core`   | `jsr:@supernuxt/core` library import. The Nuxt app still installs from npm                       |
 | `packages/create-supernuxt` | JSR `@supernuxt/create` | `deno run -A jsr:@supernuxt/create my-app`                                                       |
 
 `npm create <name>` always looks up `create-<name>`. The bin inside `create-supernuxt` must stay `create-supernuxt`. That is the command `npm create`, `pnpm create`, `bunx`, and `npx create-supernuxt` run. The `supernuxt` package ships two bins, `supernuxt` and `create-supernuxt`, and both point at `packages/create-supernuxt/index.mjs`. `npx supernuxt` runs the `supernuxt` bin.
 
-Publish the framework first so the scaffolder's dependency exists. Bump the root version and `packages/create-supernuxt/package.json` together, including `supernuxt.nuxt` when the Nuxt pin changes. The same version is written to both `jsr.json` files, `deno.json`, and `library_version` in `skills/use-supernuxt/SKILL.md`.
+Versions move together. Add a changeset with `npx changeset`, then `npm run version`: Changesets bumps `@supernuxt/core`, `@supernuxt/nuxt` and `create-supernuxt`, and `tooling/sync-versions.mjs` copies that version to the root `supernuxt` package, both `deno.json` files and `library_version` in `skills/use-supernuxt/SKILL.md`. Update `supernuxt.nuxt` in `packages/create-supernuxt/package.json` when the Nuxt pin changes. Publishing is the manual `Release` workflow.
 
 ```bash
 npm login
@@ -98,7 +98,7 @@ cd packages/create-supernuxt
 deno publish
 ```
 
-`jsr.json` at the root names `@supernuxt/core`. `packages/create-supernuxt/jsr.json` names `@supernuxt/create`. Deno publishes the package whose `jsr.json` is in the working directory.
+`packages/core/deno.json` names `@supernuxt/core`. `packages/create-supernuxt/deno.json` names `@supernuxt/create`. `deno publish` at the root publishes both workspace members.
 
 Confirm from a clean directory:
 
@@ -118,7 +118,7 @@ The generated app depends on `supernuxt` at `^` plus that version, and on `nuxt`
 | Earlier pin | 0.1.0 was `private` and was not published |
 | Nuxt        | 4.6.1, exact, in `dependencies.nuxt`      |
 | Module      | Nuxt `>=4.0.0`                            |
-| Node.js     | `>=22.21.0`                               |
+| Node.js     | `^22.22.3 \|\| >=24.15.0`                 |
 | Vue         | `^3.5.22`, with `vue-router` `^4.5.1`     |
 
 Supported releases are 0.2.x. Report vulnerabilities through [private security advisories](https://github.com/swcstudiospace/SuperNuxt/security/advisories/new). The repository does not contain production secrets.
