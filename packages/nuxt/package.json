@@ -1,5 +1,5 @@
 {
-  "name": "@supernuxt/nuxt",
+  "name": "@swcstudio/supernuxt-nuxt",
   "version": "0.2.0",
   "description": "Nuxt module for SuperNuxt: TanStack Query SSR plugin and typed auto-imports.",
   "type": "module",
@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@nuxt/kit": "^4.2.0",
-    "@supernuxt/core": "0.2.0",
+    "@swcstudio/supernuxt-core": "0.2.0",
     "ofetch": "^1.4.1"
   },
   "peerDependencies": {

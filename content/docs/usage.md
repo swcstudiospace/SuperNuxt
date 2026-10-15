@@ -9,15 +9,15 @@ A SuperNuxt app is a Nuxt 4 app that extends the `supernuxt` layer. You do not c
 
 ## Create an app
 
-After `supernuxt` and `create-supernuxt` are on npm, and `@supernuxt/create` is on JSR:
+After `@swcstudio/supernuxt` and `create-supernuxt` are on npm, and `@swcstudiospace/create-supernuxt` is on JSR:
 
 ```bash
 npm create supernuxt@latest my-app
 pnpm create supernuxt my-app
 bunx create-supernuxt my-app
 npx create-supernuxt@latest my-app
-npx supernuxt my-app
-deno run -A jsr:@supernuxt/create my-app
+npx --package=@swcstudio/supernuxt supernuxt my-app
+deno run -A jsr:@swcstudiospace/create-supernuxt my-app
 ```
 
 `bun create` is a different Bun feature. Use `bunx`. From a clone of the framework, before either registry has the package:
@@ -104,7 +104,7 @@ Set these in `nuxt.config.ts` when the defaults are wrong. `staleTime` is a nonn
 
 ```ts
 export default defineNuxtConfig({
-  extends: ["supernuxt"],
+  extends: ["@swcstudio/supernuxt"],
   supernuxt: {
     staleTime: 30_000,
     queryDevtools: true,
@@ -120,10 +120,10 @@ An existing Nuxt app can take the composables and skip the landing page, docs, a
 
 ```ts
 export default defineNuxtConfig({
-  modules: ["supernuxt"],
+  modules: ["@swcstudio/supernuxt-nuxt"],
 });
 ```
 
-`extends: ["supernuxt"]` is what the scaffolder writes. Use that when you want the pages. The difference is described in [Architecture](/docs).
+`extends: ["@swcstudio/supernuxt"]` is what the scaffolder writes. Use that when you want the pages. The difference is described in [Architecture](/docs).
 
 Install commands, the file tree, and publishing are in [Information](/docs/information).

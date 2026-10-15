@@ -1,4 +1,4 @@
-import { rstackTools, tanstackLibraries } from "@supernuxt/core";
+import { rstackTools, tanstackLibraries } from "@swcstudio/supernuxt-core";
 
 export interface StudioLink {
   href: string;
@@ -111,5 +111,9 @@ export const installCommands = [
   { id: "pnpm", label: "pnpm", command: "pnpm create supernuxt" },
   { id: "bun", label: "bun", command: "bunx create-supernuxt" },
   { id: "npx", label: "npx", command: "npx create-supernuxt@latest" },
-  { id: "deno", label: "deno", command: "deno run -A jsr:@supernuxt/create" },
+  {
+    id: "deno",
+    label: "deno",
+    command: "deno run -A jsr:@swcstudiospace/create-supernuxt",
+  },
 ] as const;

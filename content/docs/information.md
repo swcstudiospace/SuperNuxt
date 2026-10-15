@@ -5,7 +5,7 @@ section: Information
 order: 3
 ---
 
-The install commands are registry lookups. They work after `supernuxt` and `create-supernuxt` are on npm, and after `@supernuxt/create` is on JSR. Until then, run the scaffolder from a clone with `npm run create`.
+The install commands are registry lookups. They work after `@swcstudio/supernuxt` and `create-supernuxt` are on npm, and after `@swcstudiospace/create-supernuxt` is on JSR. Until then, run the scaffolder from a clone with `npm run create`.
 
 Repository: [github.com/swcstudiospace/SuperNuxt](https://github.com/swcstudiospace/SuperNuxt). Issues: [github.com/swcstudiospace/SuperNuxt/issues](https://github.com/swcstudiospace/SuperNuxt/issues).
 
@@ -16,11 +16,11 @@ npm create supernuxt@latest my-app
 pnpm create supernuxt my-app
 bunx create-supernuxt my-app
 npx create-supernuxt@latest my-app
-npx supernuxt my-app
-deno run -A jsr:@supernuxt/create my-app
+npx --package=@swcstudio/supernuxt supernuxt my-app
+deno run -A jsr:@swcstudiospace/create-supernuxt my-app
 ```
 
-`npm create supernuxt` and `pnpm create supernuxt` both install the npm package named `create-supernuxt`. `npx create-supernuxt` is that same package. `npx supernuxt` runs the `supernuxt` binary, which is the same script shipped inside the framework package. `bun create` does not run this scaffolder. Use `bunx`.
+`npm create supernuxt` and `pnpm create supernuxt` both install the npm package named `create-supernuxt`. `npx create-supernuxt` is that same package. `npx --package=@swcstudio/supernuxt supernuxt` runs the `supernuxt` binary, which is the same script shipped inside the framework package. `bun create` does not run this scaffolder. Use `bunx`.
 
 Deno can run the npm package before the JSR publish:
 
@@ -73,16 +73,16 @@ npm run dev
 
 You publish two npm packages and two JSR packages. They share one version. The root `package.json` `version` and `dependencies.nuxt` are the pin. The create package copies both into `version` and `supernuxt.nuxt`. Neither package is `private`. Both npm `package.json` files set `publishConfig.access` to `public`.
 
-| You publish                 | Registry name           | Command it unlocks                                                                               |
-| --------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
-| This repository             | npm `supernuxt`         | `npx supernuxt my-app`, and the dependency the scaffolder writes                                 |
-| `packages/create-supernuxt` | npm `create-supernuxt`  | `npm create supernuxt`, `pnpm create supernuxt`, `npx create-supernuxt`, `bunx create-supernuxt` |
-| `packages/core`             | JSR `@supernuxt/core`   | `jsr:@supernuxt/core` library import. The Nuxt app still installs from npm                       |
-| `packages/create-supernuxt` | JSR `@supernuxt/create` | `deno run -A jsr:@supernuxt/create my-app`                                                       |
+| You publish                 | Registry name                          | Command it unlocks                                                                               |
+| --------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| This repository             | npm `@swcstudio/supernuxt`             | `npx --package=@swcstudio/supernuxt supernuxt my-app`, and the dependency the scaffolder writes  |
+| `packages/create-supernuxt` | npm `create-supernuxt`                 | `npm create supernuxt`, `pnpm create supernuxt`, `npx create-supernuxt`, `bunx create-supernuxt` |
+| `packages/core`             | JSR `@swcstudiospace/supernuxt-core`   | `jsr:@swcstudiospace/supernuxt-core` library import. The Nuxt app still installs from npm        |
+| `packages/create-supernuxt` | JSR `@swcstudiospace/create-supernuxt` | `deno run -A jsr:@swcstudiospace/create-supernuxt my-app`                                        |
 
-`npm create <name>` always looks up `create-<name>`. The bin inside `create-supernuxt` must stay `create-supernuxt`. That is the command `npm create`, `pnpm create`, `bunx`, and `npx create-supernuxt` run. The `supernuxt` package ships two bins, `supernuxt` and `create-supernuxt`, and both point at `packages/create-supernuxt/index.mjs`. `npx supernuxt` runs the `supernuxt` bin.
+`npm create <name>` always looks up `create-<name>`. The bin inside `create-supernuxt` must stay `create-supernuxt`. That is the command `npm create`, `pnpm create`, `bunx`, and `npx create-supernuxt` run. The `@swcstudio/supernuxt` package ships two bins, `supernuxt` and `create-supernuxt`, and both point at `packages/create-supernuxt/index.mjs`. Because the package is scoped, plain `npx supernuxt` would resolve the unscoped `supernuxt` package. Use `npx --package=@swcstudio/supernuxt supernuxt`.
 
-Versions move together. Add a changeset with `npx changeset`, then `npm run version`: Changesets bumps `@supernuxt/core`, `@supernuxt/nuxt` and `create-supernuxt`, and `tooling/sync-versions.mjs` copies that version to the root `supernuxt` package, both `deno.json` files and `library_version` in `skills/use-supernuxt/SKILL.md`. Update `supernuxt.nuxt` in `packages/create-supernuxt/package.json` when the Nuxt pin changes. Publishing is the manual `Release` workflow.
+Versions move together. Add a changeset with `npx changeset`, then `npm run version`: Changesets bumps `@swcstudio/supernuxt-core`, `@swcstudio/supernuxt-nuxt` and `create-supernuxt`, and `tooling/sync-versions.mjs` copies that version to the root `supernuxt` package, both `deno.json` files and `library_version` in `skills/use-supernuxt/SKILL.md`. Update `supernuxt.nuxt` in `packages/create-supernuxt/package.json` when the Nuxt pin changes. Publishing is the manual `Release` workflow.
 
 ```bash
 npm login
@@ -98,14 +98,14 @@ cd packages/create-supernuxt
 deno publish
 ```
 
-`packages/core/deno.json` names `@supernuxt/core`. `packages/create-supernuxt/deno.json` names `@supernuxt/create`. `deno publish` at the root publishes both workspace members.
+`packages/core/deno.json` names `@swcstudiospace/supernuxt-core`. `packages/create-supernuxt/deno.json` names `@swcstudiospace/create-supernuxt`. `deno publish` at the root publishes both workspace members.
 
 Confirm from a clean directory:
 
 ```bash
 npm create supernuxt@latest harbor
-npx supernuxt harbor-two
-deno run -A jsr:@supernuxt/create harbor-three
+npx --package=@swcstudio/supernuxt supernuxt harbor-two
+deno run -A jsr:@swcstudiospace/create-supernuxt harbor-three
 ```
 
 The generated app depends on `supernuxt` at `^` plus that version, and on `nuxt` at the exact pin. Users do not clone this repository.

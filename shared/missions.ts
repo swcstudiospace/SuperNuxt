@@ -4,4 +4,4 @@ export {
   telemetryLine,
   type Mission,
   type MissionStatus,
-} from "@supernuxt/core";
+} from "@swcstudio/supernuxt-core";

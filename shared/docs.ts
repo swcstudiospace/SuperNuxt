@@ -1,4 +1,8 @@
-import { orderDocs, parseDocSource, type DocPage } from "@supernuxt/core";
+import {
+  orderDocs,
+  parseDocSource,
+  type DocPage,
+} from "@swcstudio/supernuxt-core";
 
 const rawDocs = import.meta.glob("../content/docs/*.md", {
   query: "?raw",
@@ -13,7 +17,7 @@ export const docPages: DocPage[] = orderDocs(
   }),
 );
 
-export { docSections } from "@supernuxt/core";
+export { docSections } from "@swcstudio/supernuxt-core";
 
 export function findDoc(slug: string): DocPage | undefined {
   return docPages.find((page) => page.slug === slug);

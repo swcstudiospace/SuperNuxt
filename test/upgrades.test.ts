@@ -22,7 +22,7 @@ describe("layer entry", () => {
       new URL("../nuxt.config.ts", import.meta.url).href,
     );
     expect(config.$meta.name).toBe("supernuxt");
-    expect(config.modules[1]).toBe("@supernuxt/nuxt");
+    expect(config.modules[1]).toBe("@swcstudio/supernuxt-nuxt");
     expect(config.css[0]).toMatch(/app\/assets\/css\/main\.css$/);
     expect(config.css[1]).toMatch(/app\/assets\/css\/studio\.css$/);
     expect(config).not.toHaveProperty("runtimeConfig");
@@ -74,9 +74,9 @@ describe("release pin", () => {
     expect(deno.version).toBe(release.version);
     expect(libraryVersion(skill)).toBe(release.version);
     expect(JSON.parse(rootPackage).exports["."]).toBe("./nuxt.config.ts");
-    expect(JSON.parse(rootPackage).dependencies["@supernuxt/nuxt"]).toBe(
-      release.version,
-    );
+    expect(
+      JSON.parse(rootPackage).dependencies["@swcstudio/supernuxt-nuxt"],
+    ).toBe(release.version);
   });
 });
 

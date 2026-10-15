@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // @ts-self-types="./index.d.mts"
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,13 +19,13 @@ Usage
   pnpm create supernuxt [dir]
   bunx create-supernuxt [dir]
   npx create-supernuxt@latest [dir]
-  npx supernuxt [dir]
-  deno run -A jsr:@supernuxt/create [dir]
+  npx --package=@swcstudio/supernuxt supernuxt [dir]
+  deno run -A jsr:@swcstudiospace/create-supernuxt [dir]
 
 Options
   --dir <path>     Target directory (default: supernuxt-app)
   --pm <name>      npm, pnpm, bun, or deno. Prints matching commands.
-  --framework <p>  Dependency spec for supernuxt (default: ^<version>)
+  --framework <p>  Dependency spec for @swcstudio/supernuxt (default: ^<version>)
   --force          Write into a directory that already has files
   --yes            Accepted for non-interactive runners
   --help           Show this message
@@ -78,7 +78,7 @@ function files(framework, name) {
         },
         dependencies: {
           nuxt: nuxtPin,
-          supernuxt: framework,
+          "@swcstudio/supernuxt": framework,
           vue: "^3.5.22",
           "vue-router": "^4.5.1",
         },
@@ -87,7 +87,7 @@ function files(framework, name) {
       2,
     )}\n`,
     "nuxt.config.ts": `export default defineNuxtConfig({
-  extends: ["supernuxt"],
+  extends: ["@swcstudio/supernuxt"],
   telemetry: false,
   compatibilityDate: "2026-10-14",
   supernuxt: {
@@ -198,9 +198,19 @@ async function main() {
   );
 }
 
-const invoked =
-  process.argv[1] &&
-  fileURLToPath(import.meta.url) === resolve(process.argv[1]);
+function isInvokedDirectly() {
+  if (!process.argv[1]) return false;
+  try {
+    // npm/npx/bun run bins through a .bin symlink, so compare real paths.
+    return (
+      realpathSync(fileURLToPath(import.meta.url)) ===
+      realpathSync(resolve(process.argv[1]))
+    );
+  } catch {
+    return false;
+  }
+}
+const invoked = isInvokedDirectly();
 if (invoked) {
   main().catch((error) => {
     process.stderr.write(

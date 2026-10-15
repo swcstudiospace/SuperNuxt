@@ -49,8 +49,8 @@ jobs:
       - name: Publish the supernuxt layer to npm (skips a published version)
         run: |
           version="$(node -p "require('./package.json').version")"
-          if npm view "supernuxt@${version}" version >/dev/null 2>&1; then
-            echo "supernuxt@${version} is already on npm"
+          if npm view "@swcstudio/supernuxt@${version}" version >/dev/null 2>&1; then
+            echo "@swcstudio/supernuxt@${version} is already on npm"
           else
             npm publish --provenance --access public
           fi

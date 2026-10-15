@@ -1,3 +1,3 @@
-import { createLedger, missions } from "@supernuxt/core";
+import { createLedger, missions } from "@swcstudio/supernuxt-core";
 
 export const ledger = createLedger(missions);

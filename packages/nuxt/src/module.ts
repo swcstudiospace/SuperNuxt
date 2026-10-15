@@ -4,7 +4,10 @@ import {
   createResolver,
   defineNuxtModule,
 } from "@nuxt/kit";
-import { parseSuperNuxtOptions, superNuxtDefaults } from "@supernuxt/core";
+import {
+  parseSuperNuxtOptions,
+  superNuxtDefaults,
+} from "@swcstudio/supernuxt-core";
 
 export interface SuperNuxtOptions {
   queryDevtools: boolean;

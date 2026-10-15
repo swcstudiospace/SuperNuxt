@@ -1,4 +1,4 @@
-import { parseStatusChange } from "@supernuxt/core";
+import { parseStatusChange } from "@swcstudio/supernuxt-core";
 import { ledger } from "../../ledger";
 
 export default defineEventHandler(async (event) => {

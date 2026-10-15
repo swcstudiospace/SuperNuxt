@@ -5,7 +5,7 @@ section: Architecture
 order: 1
 ---
 
-SuperNuxt is a Nuxt 4.6 layer. The package entry `.` is `nuxt.config.ts`, which calls `defineLayerConfig` in `config/layer.ts`. A consumer that extends the layer gets the module, the CSS, the landing page, this documentation, and the studio. The module alone is the separate package `@supernuxt/nuxt` (`npm i @supernuxt/nuxt`, then `modules: ["@supernuxt/nuxt"]`); framework-agnostic code is `@supernuxt/core` on npm and JSR.
+SuperNuxt is a Nuxt 4.6 layer. The package entry `.` is `nuxt.config.ts`, which calls `defineLayerConfig` in `config/layer.ts`. A consumer that extends the layer gets the module, the CSS, the landing page, this documentation, and the studio. The module alone is the separate package `@swcstudio/supernuxt-nuxt` (`npm i @swcstudio/supernuxt-nuxt`, then `modules: ["@swcstudio/supernuxt-nuxt"]`); framework-agnostic code is `@swcstudio/supernuxt-core` on npm and `@swcstudiospace/supernuxt-core` on JSR.
 
 Nuxt serves the app with Vite. Rstack builds the pieces around the repository: tests, lint, the core library, and the static console. User documentation is this Nuxt app. Pages are markdown in `content/docs`. There is no second docs site.
 
@@ -17,7 +17,7 @@ Extending the layer is the install the scaffolder writes:
 
 ```ts
 export default defineNuxtConfig({
-  extends: ["supernuxt"],
+  extends: ["@swcstudio/supernuxt"],
 });
 ```
 
@@ -27,11 +27,11 @@ Registering the module without the layer skips those pages and still installs th
 
 ```ts
 export default defineNuxtConfig({
-  modules: ["supernuxt"],
+  modules: ["@swcstudio/supernuxt-nuxt"],
 });
 ```
 
-Inside this repository the module is the workspace package `packages/nuxt`, built with `@nuxt/module-builder` and registered as `@supernuxt/nuxt`. The module's `configKey` is `supernuxt`, and it declares compatibility with Nuxt `>=4.0.0`. Parsed options are written to `runtimeConfig.public.supernuxt`. `useSuperNuxt()` reads them back.
+Inside this repository the module is the workspace package `packages/nuxt`, built with `@nuxt/module-builder` and registered as `@swcstudio/supernuxt-nuxt`. The module's `configKey` is `supernuxt`, and it declares compatibility with Nuxt `>=4.0.0`. Parsed options are written to `runtimeConfig.public.supernuxt`. `useSuperNuxt()` reads them back.
 
 The module auto-imports `useQuery`, `useMutation`, `useQueryClient`, `useLiveQuery`, `useStore`, `useForm`, `useTable`, `useVirtualizer`, `useHotkey`, `useHotkeys`, `useChat`, `useServerFn`, `useMissionBoard`, and `useSuperNuxt`. A page does not import them.
 

@@ -1,5 +1,8 @@
 import { useRuntimeConfig } from "#imports";
-import { superNuxtDefaults, type SuperNuxtOptions } from "@supernuxt/core";
+import {
+  superNuxtDefaults,
+  type SuperNuxtOptions,
+} from "@swcstudio/supernuxt-core";
 
 export function useSuperNuxt(): SuperNuxtOptions {
   const config = useRuntimeConfig();

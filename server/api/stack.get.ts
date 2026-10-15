@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { rstackTools, tanstackLibraries } from "@supernuxt/core";
+import { rstackTools, tanstackLibraries } from "@swcstudio/supernuxt-core";
 
 const require = createRequire(import.meta.url);
 

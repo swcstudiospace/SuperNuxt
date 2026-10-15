@@ -19,13 +19,13 @@ function insideRoot(root: string, path: string): string {
 }
 
 /**
- * The Nuxt config for this repo and for `extends: ["supernuxt"]`.
+ * The Nuxt config for this repo and for `extends: ["@swcstudio/supernuxt"]`.
  * Module and CSS paths are absolute, taken from this file's directory,
  * so a consumer root cannot steal them.
  */
 export function defineLayerConfig(configFileUrl: string): LayerFragment {
   const root = dirname(fileURLToPath(configFileUrl));
-  const moduleEntry = "@supernuxt/nuxt";
+  const moduleEntry = "@swcstudio/supernuxt-nuxt";
   const css = [
     insideRoot(root, join(root, "app/assets/css/main.css")),
     insideRoot(root, join(root, "app/assets/css/studio.css")),
