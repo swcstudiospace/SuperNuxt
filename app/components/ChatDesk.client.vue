@@ -6,9 +6,11 @@ const { messages, sendMessage, isLoading, error, stop } = useChat({
   connection: fetchServerSentEvents("/api/chat"),
 });
 
-function textOf(part: { type?: string; content?: string; text?: string }) {
-  if (part.type !== "text") return "";
-  return part.content || part.text || "";
+function textOf(part: unknown): string {
+  const view = part as { type?: string; content?: unknown; text?: unknown };
+  if (view.type !== "text") return "";
+  const value = view.content || view.text;
+  return typeof value === "string" ? value : "";
 }
 
 function send() {

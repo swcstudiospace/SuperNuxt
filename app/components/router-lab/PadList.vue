@@ -16,7 +16,8 @@ const visible = computed(() =>
 );
 
 function setShift(shift: "dawn" | "night") {
-  void navigate({ search: { shift } });
+  // The island router is not globally registered, so search params are untyped.
+  void navigate({ search: { shift } as never });
 }
 </script>
 
