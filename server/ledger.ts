@@ -1,4 +1,3 @@
-import { createLedger } from "@supernuxt/core";
-import { missions } from "#shared/missions";
+import { createLedger, missions } from "@supernuxt/core";
 
 export const ledger = createLedger(missions);
