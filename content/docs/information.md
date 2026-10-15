@@ -49,7 +49,7 @@ The scaffolder also accepts `--dir`, `--help`, and `--yes`. `--yes` is accepted 
 
 ## From this repository
 
-Node.js 22.21 or newer.
+Node.js 22.22.3+ or 24.15+.
 
 ```bash
 npm install
@@ -118,7 +118,7 @@ The generated app depends on `supernuxt` at `^` plus that version, and on `nuxt`
 | Earlier pin | 0.1.0 was `private` and was not published |
 | Nuxt        | 4.6.1, exact, in `dependencies.nuxt`      |
 | Module      | Nuxt `>=4.0.0`                            |
-| Node.js     | `>=22.21.0`                               |
+| Node.js     | `^22.22.3 \|\| >=24.15.0`                 |
 | Vue         | `^3.5.22`, with `vue-router` `^4.5.1`     |
 
 Supported releases are 0.2.x. Report vulnerabilities through [private security advisories](https://github.com/swcstudiospace/SuperNuxt/security/advisories/new). The repository does not contain production secrets.

@@ -1,0 +1,51 @@
+# Staged release pipeline. It never runs on its own: the only trigger is a
+# manual dispatch, and the job is skipped unless the repository variable
+# SUPERNUXT_RELEASE_ENABLED is set to "true" by a maintainer.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type "publish" to publish the current versions to npm and JSR
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: ${{ vars.SUPERNUXT_RELEASE_ENABLED == 'true' && inputs.confirm == 'publish' }}
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: read
+      id-token: write # npm provenance and JSR OIDC
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint:pkg
+
+      - name: Publish to npm with provenance
+        run: |
+          npm publish -w @supernuxt/core --provenance --access public
+          npm publish -w @supernuxt/nuxt --provenance --access public
+          npm publish -w create-supernuxt --provenance --access public
+          npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to JSR (OIDC)
+        run: deno publish

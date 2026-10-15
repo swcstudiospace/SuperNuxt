@@ -4,7 +4,7 @@ SuperNuxt is a Nuxt 4 framework. Issues and pull requests are welcome at [github
 
 ## What you need
 
-- Node.js 22.21 or newer. The root `package.json` `engines` field is the pin.
+- Node.js 22.22.3+ or 24.15+. The root `package.json` `engines` field is the pin.
 - npm. The lockfile is `package-lock.json`.
 
 ```bash

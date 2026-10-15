@@ -105,6 +105,6 @@ When `queryDevtools` is true, studio routes mount the TanStack Devtools dock wit
 
 Rspack is the bundler underneath Rsbuild, Rslib, and Rstest. Rspress ships inside the Rstack toolchain. SuperNuxt does not use it for a docs site. The pages you are reading are rendered by this app from `content/docs`.
 
-TanStack Config, CLI, and Intent are installed for the framework, not for the studio benches. Config 0.22 has no root export, so `tooling/publish.ts` imports `@tanstack/config/publish`. Intent validates `skills/use-supernuxt/SKILL.md`.
+TanStack CLI and Intent are installed for the framework, not for the studio benches. Releases use Changesets (`.changeset/`) and `tooling/sync-versions.mjs`; Intent validates `skills/use-supernuxt/SKILL.md`.
 
 Continue with [Usage](/docs/usage) to create an app and call the module, or [Information](/docs/information) for install commands and publishing.
