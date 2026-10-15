@@ -48,24 +48,64 @@ jobs:
         if: steps.changesets.outputs.count != '0'
         run: node tooling/sync-release-version.mjs
 
-      - name: Open a version pull request
+      - name: Check the version tree and open a pull request
         if: steps.changesets.outputs.count != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           if git diff --quiet; then
             echo "Version command made no file changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -B changeset-release/main
+
+          tmp="$(mktemp -d)"
+          cp package.json package-lock.json CHANGELOG.md jsr.json deno.json "$tmp/"
+          cp packages/create-supernuxt/package.json "$tmp/create-package.json"
+          cp packages/create-supernuxt/jsr.json "$tmp/create-jsr.json"
+          cp skills/use-supernuxt/SKILL.md "$tmp/SKILL.md"
+          cp -a .changeset "$tmp/changeset"
+
+          git checkout -- .
+          git clean -fd .changeset
+          git fetch origin main
+          if git fetch origin changeset-release/main; then
+            git checkout -B changeset-release/main origin/changeset-release/main
+            git merge origin/main --no-edit
+          else
+            git checkout -B changeset-release/main origin/main
+          fi
+
+          cp "$tmp/package.json" package.json
+          cp "$tmp/package-lock.json" package-lock.json
+          cp "$tmp/CHANGELOG.md" CHANGELOG.md
+          cp "$tmp/jsr.json" jsr.json
+          cp "$tmp/deno.json" deno.json
+          cp "$tmp/create-package.json" packages/create-supernuxt/package.json
+          cp "$tmp/create-jsr.json" packages/create-supernuxt/jsr.json
+          cp "$tmp/SKILL.md" skills/use-supernuxt/SKILL.md
+          rm -rf .changeset
+          cp -a "$tmp/changeset" .changeset
+
+          # github.token pushes do not start other workflows. Run the checks
+          # on the tree that will be pushed.
+          npm test
+          npm run check
+          npm run typecheck
+          npm run build
+
           git add package.json package-lock.json CHANGELOG.md jsr.json deno.json .changeset packages/create-supernuxt/package.json packages/create-supernuxt/jsr.json skills/use-supernuxt/SKILL.md
-          git commit -m "chore: version packages"
+          if git diff --cached --quiet; then
+            echo "Release branch already has these version files."
+          else
+            git commit -m "chore: version packages"
+          fi
           git push origin changeset-release/main
           existing="$(gh pr list --head changeset-release/main --json number --jq 'length')"
           if [ "$existing" != "0" ]; then
             echo "Version pull request already exists."
           else
-            gh pr create --base main --head changeset-release/main --title "chore: version packages" --body "Version bump and changelog only. This workflow does not publish to npm or JSR."
+            gh pr create --base main --head changeset-release/main --title "chore: version packages" --body "Version bump and changelog only. This workflow does not publish to npm or JSR. The release job ran test, check, typecheck, and build on this commit because a github.token push does not start the CI workflow."
           fi

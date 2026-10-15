@@ -10,14 +10,27 @@
       "groupSlug": "all-minor-patch"
     },
     {
-      "description": "nuxt is an exact pin. packages/create-supernuxt records the same pin in supernuxt.nuxt.",
+      "description": "Keep dependencies.nuxt and packages/create-supernuxt supernuxt.nuxt on one exact pin, in one pull request.",
       "matchPackageNames": ["nuxt"],
+      "groupName": "nuxt pin",
+      "groupSlug": "nuxt-pin",
       "rangeStrategy": "pin"
     },
     {
       "description": "examples/minimal depends on this checkout with file:../.. and is not a published package.",
       "matchFileNames": ["examples/**"],
       "enabled": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/packages/create-supernuxt/package.json/"],
+      "matchStrings": [
+        "\"supernuxt\"\\s*:\\s*\\{[\\s\\S]*?\"nuxt\"\\s*:\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "depNameTemplate": "nuxt",
+      "datasourceTemplate": "npm"
     }
   ]
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { findDoc, neighbors } from "#shared/docs";
+import { findDoc, neighbors } from "../../../shared/docs";
 
 const route = useRoute();
 const slug = computed(() => String(route.params.slug || ""));

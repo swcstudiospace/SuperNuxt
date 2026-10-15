@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { installCommands } from "#shared/nav";
+import { installCommands } from "../../shared/nav";
 import { rstackTools, tanstackLibraries } from "../../src/index";
 
 const copied = ref("");

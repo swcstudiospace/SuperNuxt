@@ -2,7 +2,7 @@
 
 This repository uses [Changesets](https://github.com/changesets/changesets) to bump the root `package.json` version and prepend the changelog.
 
-The workflow in `.github/workflows/release.yml` runs `changeset version` and opens a pull request. It does not run `changeset publish`, `npm publish`, or `deno publish`.
+The workflow in `.github/workflows/release.yml` runs `changeset version`, then test, check, typecheck, and build, and opens or updates a pull request on `changeset-release/main`. It updates that branch with a normal push. It does not run `changeset publish`, `npm publish`, or `deno publish`. A `github.token` push does not start the CI workflow, so the release job runs those checks itself.
 
 Changesets only sees the root package. After a version pull request, the workflow also copies that version into:
 

@@ -3,7 +3,7 @@ import { barX, defineChart } from "@tanstack/charts";
 import { scaleBand } from "@tanstack/charts/scales/band";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
 import { Chart } from "@tanstack/charts/vue";
-import { missions } from "#shared/missions";
+import { missions } from "../../../shared/missions";
 
 const focused = ref("");
 
